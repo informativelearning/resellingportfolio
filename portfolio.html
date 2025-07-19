@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Legal Shielding Layer 1: Title frames it as a personal, non-commercial entity -->
     <title>WC Drops - Private Lookbook</title>
     <style>
         :root {
@@ -19,7 +18,6 @@
             --glow: 0 0 25px rgba(124, 58, 237, 0.3);
         }
 
-        /* Basic Reset for Consistency */
         * {
             margin: 0;
             padding: 0;
@@ -35,14 +33,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* The Main Container for Content */
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Header Style: The first impression. Confident but not corporate. */
         header {
             text-align: center;
             padding: 40px 0;
@@ -65,7 +61,6 @@
             margin: 0 auto;
         }
 
-        /* Section Titles: Create clear visual separation for categories. */
         .category-title {
             font-size: 1.8rem;
             color: var(--text-color);
@@ -75,14 +70,12 @@
             margin: 50px 0 25px 0;
         }
         
-        /* Grid Layout for Product Cards */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
-        /* Product Card Styling: The core component of our catalog. */
         .product-card {
             background-color: var(--card-color);
             border: 1px solid var(--border-color);
@@ -104,21 +97,28 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .product-card p {
             color: var(--subtle-text);
             font-size: 0.9rem;
-            flex-grow: 1; /* Pushes price to the bottom */
+            flex-grow: 1;
             margin-bottom: 20px;
         }
 
-        /* Price Tag: The call to value. */
         .price-tag {
             background-color: rgba(124, 58, 237, 0.1);
             border-radius: 8px;
             padding: 15px;
             text-align: center;
+        }
+
+        .price-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .price-tag .label {
@@ -144,17 +144,16 @@
             margin-top: 5px;
         }
         
-        /* Badges: Conveying status with insider language */
         .status-badge {
             font-size: 0.75rem;
             font-weight: 600;
             padding: 5px 10px;
             border-radius: 20px;
+            white-space: nowrap;
         }
         .limited { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
         .hot { background-color: rgba(239, 68, 68, 0.1); color: #EF4444; }
 
-        /* FAQ Section: Our legal shield disguised as helpful info. */
         #faq { margin-top: 60px; }
         .faq details {
             background-color: var(--card-color);
@@ -177,7 +176,6 @@
             margin-left: 10px;
         }
 
-        /* Footer: Final legal disclaimer. */
         footer {
             text-align: center;
             margin-top: 60px;
@@ -189,16 +187,15 @@
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
             .product-grid { grid-template-columns: 1fr; }
+            .product-card h3 { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- HEADER -->
         <header>
             <h1>WC Drops</h1>
-            <p>Private lookbook for the Wasco community. Quality hookups, no middlemen.</p>
+            <p>The Wasco hookup. Real access, no hype. This is just the lookbook.</p>
         </header>
 
         <!-- BUNDLES SECTION (High-Value Lead) -->
@@ -216,16 +213,24 @@
             </div>
         </section>
 
-        <!-- WEEKLY RAFFLE (Customer Acquisition) -->
+        <!-- WEEKLY RAFFLE (Primary Hook) -->
         <section id="raffle">
-            <h2 class="category-title">Weekly Raffle</h2>
+            <h2 class="category-title">The Come-Up (Raffles)</h2>
             <div class="product-grid">
                 <div class="product-card">
-                    <h3>This Week's Prize: Essentials Hoodie</h3>
-                    <p>The weekly come-up. Get a shot at top-tier gear for the price of a snack. Winners drawn live on IG.</p>
+                    <h3>Weekly Digital Raffle</h3>
+                    <p><strong>This week: 1-Year Spotify Solo Pass.</strong> Your chance to get hooked up for the price of a soda. Winners drawn live on IG story every Friday.</p>
                     <div class="price-tag">
                         <span class="label">Cash Entry Spot</span>
                         <span class="price">$3</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <h3>Monthly Gear Raffle</h3>
+                    <p><strong>This month: Essentials Hoodie.</strong> Your shot at top-tier gear. Less frequent, bigger prize. Last Friday of the month.</p>
+                     <div class="price-tag">
+                        <span class="label">Cash Entry Spot</span>
+                        <span class="price">$5</span>
                     </div>
                 </div>
             </div>
@@ -233,55 +238,61 @@
 
         <!-- DIGITAL SERVICES (The Core Offering) -->
         <section id="digital-access">
-            <h2 class="category-title">Digital Access Plug</h2>
+            <h2 class="category-title">Digital Plug</h2>
             <div class="product-grid">
                 <div class="product-card">
-                    <h3>Spotify Premium <span class="status-badge hot">HOT</span></h3>
-                    <p>Full premium access. "Seat" is a spot on a shared plan. "Solo" is your own private account, upgraded.</p>
-                    <div class="price-tag" style="margin-bottom: 10px;">
-                        <span class="label">1-Year Seat<span class="retail-price">($40)</span></span>
-                        <span class="price">$25</span>
-                    </div>
-                    <div class="price-tag">
-                        <span class="label">1-Year Solo<span class="retail-price">($120)</span></span>
-                        <span class="price">$40</span>
+                    <h3>Spotify Premium <span class="status-badge hot">TOP SELLER</span></h3>
+                    <p>Full premium access. "Seat" is a spot on a shared plan. "Solo" is your own private account, upgraded. Guaranteed for the year.</p>
+                    <div class="price-options">
+                        <div class="price-tag">
+                            <span class="label">1-Year Seat<span class="retail-price">($40)</span></span>
+                            <span class="price">$25</span>
+                        </div>
+                        <div class="price-tag">
+                            <span class="label">1-Year Solo<span class="retail-price">($120)</span></span>
+                            <span class="price">$40</span>
+                        </div>
                     </div>
                 </div>
                 <div class="product-card">
                     <h3>Fortnite Crew</h3>
-                    <p>1,000 V-Bucks monthly, Battle Pass, and exclusive Crew Pack. Direct account activation via regional pricing.</p>
+                    <p>1k V-Bucks a month plus the Battle Pass and Crew Pack. Hooked up directly on your account.</p>
                     <div class="price-tag">
                         <span class="label">3-Month Pass<span class="retail-price">($36)</span></span>
                         <span class="price">$20</span>
                     </div>
                 </div>
-                <!-- Add Netflix/Crunchyroll cards here if desired, following the same format. -->
-            </div>
-        </section>
-        
-        <!-- AUDIO TECH (The Hardware) -->
-        <section id="audio-tech">
-            <h2 class="category-title">Audio Tech Drops</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>AirPods Pro (2nd Gen)</h3>
-                    <p>1:1 rep with full features (ANC, etc.) and valid serial. Indistinguishable from retail.</p>
-                    <div class="price-tag">
-                        <span class="label">Top-Tier Rep<span class="retail-price">($249)</span></span>
-                        <span class="price">$70</span>
-                    </div>
-                </div>
-                <!-- Add Sony XM5 / other headphones here if desired -->
             </div>
         </section>
 
-        <!-- STYLE & FRAGRANCE (The Flex) -->
+        <!-- AUDIO TECH (Core Hardware) -->
+        <section id="audio-tech">
+            <h2 class="category-title">Audio Drops</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>AirPods Pro (2nd Gen) <span class="status-badge hot">TOP SELLER</span></h3>
+                    <p>The ones everyone wants. Full-feature with ANC, valid serial. "Rep" is 1:1, "Factory 2nd" is legit with a tiny cosmetic flaw.</p>
+                    <div class="price-options">
+                        <div class="price-tag">
+                            <span class="label">1:1 REP<span class="retail-price">($249)</span></span>
+                            <span class="price">$70</span>
+                        </div>
+                        <div class="price-tag">
+                            <span class="label">Factory 2nd<span class="retail-price">($249)</span></span>
+                            <span class="price">$110</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- STYLE (The Flex) -->
         <section id="style">
             <h2 class="category-title">Style & Fragrance</h2>
             <div class="product-grid">
                 <div class="product-card">
-                    <h3>Essentials Hoodie <span class="status-badge limited">LIMITED</span></h3>
-                    <p>Heavyweight fleece, 1:1 rep with correct tags/fit. Colors: Onyx, Grey. Don't pay the PacSun price.</p>
+                    <h3>Essentials Hoodie <span class="status-badge limited">PRE-ORDER</span></h3>
+                    <p>The real heavyweight fleece you've seen online. 1:1 rep with correct tags and oversized fit. Don't pay the PacSun price.</p>
                     <div class="price-tag">
                         <span class="label">Our Price<span class="retail-price">($95)</span></span>
                         <span class="price">$80</span>
@@ -289,43 +300,46 @@
                 </div>
                  <div class="product-card">
                     <h3>Dior Sauvage Elixir</h3>
-                    <p>High-concentration replica oil from master perfumers. Lasts 8+ hours. Identical scent.</p>
+                    <p>This is the one that gets noticed. High-concentration replica oil that lasts all day and smells identical to the real deal.</p>
                     <div class="price-tag">
                         <span class="label">50ml Bottle<span class="retail-price">($180)</span></span>
                         <span class="price">$60</span>
                     </div>
                 </div>
-                 <!-- Add other style/fragrance cards here -->
             </div>
         </section>
 
-        <!-- FAQ (The Shield) -->
+        <!-- FAQ (The Shield & Rulebook) -->
         <section id="faq">
-            <h2 class="category-title">The Code (FAQ)</h2>
+            <h2 class="category-title">The Code (How It Works)</h2>
             <div class="faq">
-                <details open> <!-- This is now open by default -->
-                    <summary>How do I get something?</summary>
-                    <p>This site is just the catalog. It's my portfolio to show what I can source. If you see something you want, you hit me up in person. All reservations are made with me directly.</p>
+                <details open>
+                    <summary>How do I get stuff?</summary>
+                    <p>You hit me up in person. This site is just to show you what's possible. All deals are made face-to-face. I'm the primary vendor; this is just my catalog.</p>
                 </details>
-                <details open> <!-- This is now open by default -->
-                    <summary>How do I pay? Is it cash only?</summary>
-                    <p><strong>CASH ONLY. NO EXCEPTIONS.</strong> This is a community thing, face-to-face. I don't use apps. A deposit is required to lock in your spot for the weekly group buy. Remainder is due in cash when I hand you the item. Simple.</p>
+                <details open>
+                    <summary>Cash only?</summary>
+                    <p><strong>CASH ONLY.</strong> It keeps things simple and direct. No digital trail. A cash deposit locks in your spot for my weekly Friday order. Pay the rest in cash when you get your item.</p>
                 </details>
                 <details>
                     <summary>When do you place orders?</summary>
                     <p>I pool all the deposits and place one big order every Friday. This is how we get the best price. Turnaround is usually 7-10 days after that. I'll keep you updated.</p>
                 </details>
                 <details>
-                    <summary>Is this stuff legit?</summary>
-                    <p>Read the descriptions. I'm 100% straight up. "1:1 Rep" is a top-quality replica. "Seat" is a shared plan. It's the best value you can get, and I stand by the quality of what I source.</p>
+                    <summary>Is this legit?</summary>
+                    <p>I'm 100% straight up. I tell you if it's a rep or a factory 2nd. I test the digital stuff. I stand behind the quality of what I source because my reputation around here is everything.</p>
+                </details>
+                <details>
+                    <summary>What's the wait time?</summary>
+                    <p>Usually about a week after the Friday order. I'm not Amazon, I'm one person coordinating with real suppliers. I'll keep you posted.</p>
                 </details>
             </div>
         </section>
 
         <!-- FOOTER (Final Legal Disclaimer) -->
         <footer>
-            <p>© 2025 WC Drops // Private Curation Portfolio</p>
-            <p>For informational and demonstration purposes only. Not a commercial retail website. All transactions are coordinated as private group buys.</p>
+            <p>© 2025 WC Drops // Private Lookbook & Curation Project</p>
+            <p>Displayed for informational purposes. All transactions coordinated as private group buys between friends.</p>
         </footer>
     </div>
 </body>
