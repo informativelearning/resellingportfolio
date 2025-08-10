@@ -3,116 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The WascoVault - Private Archives</title>
+    <title>WascoVault - Fragrances</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --card-color: #1E1E1E;
-            --text-color: #E0E0E0;
-            --accent-color: #D4AF37; /* Gold for a "vault" feel */
-            --accent-gradient: linear-gradient(135deg, #F0E68C 0%, #D4AF37 100%);
-            --subtle-text: #9CA3AF;
-            --border-color: #333333;
-            --glow: 0 0 30px rgba(212, 175, 55, 0.2);
+            --bg-color: #0A0A0A;
+            --card-color: #1A1A1A;
+            --text-color: #F5F5F5;
+            --accent-color: #00D4AA;
+            --accent-gradient: linear-gradient(135deg, #00F5CC 0%, #00D4AA 50%, #00B894 100%);
+            --subtle-text: #A8A8A8;
+            --border-color: #2A2A2A;
+            --glow: 0 0 40px rgba(0, 212, 170, 0.15);
+            --card-glow: 0 8px 32px rgba(0, 212, 170, 0.12);
+            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.4);
+            --price-color: #FFD60A;
+            --retail-color: #FF6B6B;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-color);
+            background: radial-gradient(ellipse at center, #111111 0%, #0A0A0A 70%);
             color: var(--text-color);
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 170, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 212, 170, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         
         .navbar {
-            background-color: rgba(30, 30, 30, 0.8);
+            background: rgba(10, 10, 10, 0.95);
             border-bottom: 1px solid var(--border-color);
-            padding: 15px 20px;
+            padding: 18px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-brand {
             font-weight: 800;
             font-size: 1.5rem;
             color: var(--text-color);
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
-        .nav-menu { display: flex; gap: 20px; }
+        .nav-menu { display: flex; gap: 25px; }
         .nav-link {
             color: var(--subtle-text);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 0.9rem;
-            transition: color 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .nav-link:hover { color: var(--accent-color); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--accent-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover { 
+            color: var(--accent-color); 
+        }
+        .nav-link:hover::after { width: 100%; }
 
-        header { text-align: center; padding: 60px 20px; margin-bottom: 40px; }
+        header { 
+            text-align: center; 
+            padding: 70px 20px 50px; 
+            margin-bottom: 40px; 
+        }
         header h1 {
             font-size: clamp(3rem, 7vw, 4.5rem);
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
-        header p { color: var(--subtle-text); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        header p { 
+            color: var(--subtle-text); 
+            font-size: 1.2rem; 
+            max-width: 650px; 
+            margin: 0 auto; 
+            line-height: 1.6;
+            font-weight: 400;
+        }
         
         .category-title {
             font-size: 1.8rem;
             font-weight: 700;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 15px;
-            margin: 50px 0 25px 0;
+            position: relative;
+            padding-left: 20px;
+            margin: 50px 0 30px 0;
+            color: var(--text-color);
+        }
+        .category-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 4px;
+            height: 30px;
+            background: var(--accent-gradient);
+            transform: translateY(-50%);
+            border-radius: 2px;
         }
         
         .portal-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
         }
+
         .portal-card {
-            background-color: var(--card-color);
+            background: linear-gradient(145deg, var(--card-color) 0%, #151515 100%);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 25px;
+            padding: 30px;
             text-decoration: none;
             color: var(--text-color);
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-deep);
         }
-        .portal-card:hover { transform: translateY(-5px); box-shadow: var(--glow); border-color: var(--accent-color);}
-        .portal-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent-color);}
-        .portal-card p { color: var(--subtle-text); font-size: 0.9rem; flex-grow: 1; margin-bottom: 20px; }
-        .portal-card .card-footer { font-size: 0.9rem; font-weight: 600; color: var(--subtle-text); transition: color 0.2s ease;}
-        .portal-card:hover .card-footer { color: var(--accent-color); }
+        .portal-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: var(--card-glow), var(--shadow-deep);
+            border-color: var(--accent-color);
+        }
+        .portal-card h3 { 
+            font-size: 1.4rem; 
+            margin-bottom: 12px; 
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .portal-card p { 
+            color: var(--subtle-text); 
+            font-size: 0.95rem; 
+            flex-grow: 1; 
+            margin-bottom: 20px; 
+            line-height: 1.5;
+        }
+        .portal-card .card-footer { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            color: var(--subtle-text); 
+            transition: all 0.3s ease;
+        }
+        .portal-card:hover .card-footer { 
+            color: var(--accent-color);
+        }
 
+        .brand-section {
+            margin-bottom: 40px;
+        }
+        
+        .brand-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: linear-gradient(145deg, var(--card-color) 0%, #151515 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-header::after {
+            content: '→';
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .brand-header:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-glow), var(--shadow-deep);
+            border-color: var(--accent-color);
+        }
+        
+        .brand-header:hover::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(5px);
+        }
+        
+        .brand-logo {
+            width: 70px;
+            height: 70px;
+            background: var(--accent-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: black;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+        
+        .brand-info h3 {
+            font-size: 1.6rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        .brand-info p {
+            color: var(--subtle-text);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .brand-stats {
+            margin-left: auto;
+            text-align: right;
+            padding-right: 40px;
+        }
+
+        .brand-stats .count {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .brand-stats .label {
+            font-size: 0.8rem;
+            color: var(--subtle-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            padding: 0 25px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(0, 212, 170, 0.08);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+            transition: all 0.2s ease;
+        }
+
+        .preview-item:hover {
+            background: rgba(0, 212, 170, 0.12);
+            transform: translateX(3px);
+        }
+
+        .preview-image {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--border-color) 0%, #333 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .preview-info h5 {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .preview-info span {
+            font-size: 0.85rem;
+            color: var(--price-color);
+            font-weight: 700;
+        }
+
+        .stock-notice {
+            background: rgba(255, 214, 10, 0.1);
+            border: 1px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .stock-notice h3 {
+            color: var(--price-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .stock-notice p {
+            color: var(--subtle-text);
+            font-size: 1rem;
+        }
 
         #faq { margin-top: 60px; }
-        .faq details { background-color: var(--card-color); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; padding: 10px; }
-        .faq summary { font-weight: 600; cursor: pointer; padding: 10px; font-size: 1.1rem; }
-        .faq p { padding: 10px 15px 15px 15px; color: var(--subtle-text); border-left: 2px solid var(--accent-color); margin-left: 10px; font-size: 0.95rem; }
+        .faq details { 
+            background: linear-gradient(145deg, var(--card-color) 0%, #151515 100%);
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            margin-bottom: 15px; 
+            padding: 10px;
+            box-shadow: var(--shadow-deep);
+            transition: all 0.3s ease;
+        }
+        .faq details:hover {
+            border-color: var(--accent-color);
+        }
+        .faq summary { 
+            font-weight: 600; 
+            cursor: pointer; 
+            padding: 15px; 
+            font-size: 1.1rem;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        .faq summary:hover {
+            color: var(--accent-color);
+        }
+        .faq p { 
+            padding: 15px 20px 20px 20px; 
+            color: var(--subtle-text); 
+            border-left: 3px solid var(--accent-color); 
+            margin-left: 15px; 
+            font-size: 0.95rem; 
+            line-height: 1.6;
+            background: rgba(0, 212, 170, 0.05);
+            border-radius: 0 6px 6px 0;
+        }
 
-        footer { text-align: center; margin-top: 60px; padding: 30px; color: #6B7280; font-size: 0.85rem; }
+        footer { 
+            text-align: center; 
+            margin-top: 70px; 
+            padding: 30px; 
+            color: #666; 
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { gap: 15px; }
+            .nav-link { font-size: 0.85rem; }
+            header { padding: 50px 20px 30px; }
+            .portal-grid { grid-template-columns: 1fr; gap: 20px; }
+            .portal-card { padding: 20px; }
+            .category-title { font-size: 1.5rem; margin: 40px 0 20px 0; }
+            .brand-header { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 20px;
+            }
+            .brand-logo { margin-right: 0; margin-bottom: 15px; }
+            .brand-stats { margin-left: 0; margin-top: 15px; text-align: center; padding-right: 0; }
+            .brand-preview { grid-template-columns: 1fr; padding: 0 15px; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-brand">THE WASCOVAULT</a>
+            <a href="index.html" class="nav-brand">WASCOVAULT</a>
             <div class="nav-menu">
-                <a href="french-houses.html" class="nav-link">French Houses</a>
-                <a href="italian-american.html" class="nav-link">Italian / American</a>
-                <a href="avant-garde.html" class="nav-link">Avant-Garde</a>
+                <a href="#collection" class="nav-link">The Collection</a>
+                <a href="#protocol" class="nav-link">The Protocol</a>
             </div>
         </div>
     </nav>
@@ -120,56 +419,301 @@
     <div class="container">
         <header>
             <h1>The WascoVault</h1>
-            <p>A private, curated archive of the definitive versions of the world's most iconic fragrances. Access granted.</p>
+            <p>You found the fragrance plug. Every bottle is the real deal - same performance as retail, better prices. Quality over everything.</p>
         </header>
 
-        <section id="the-archives">
-            <h2 class="category-title">Explore The Archives</h2>
+        <section id="the-hookup">
+            <h2 class="category-title">The Hookup Protocol</h2>
             <div class="portal-grid">
 
-                <a href="french-houses.html" class="portal-card">
-                    <h3>The French Archives</h3>
-                    <p>The timeless pillars of luxury. Featuring the complete collections of Chanel, Dior, Parfums de Marly, and Creed.</p>
-                    <div class="card-footer">Unlock Collection &rarr;</div>
-                </a>
+                <div class="portal-card">
+                    <h3>First Time Buyer?</h3>
+                    <p>Good looking out for tapping in. Every first purchase comes with sample vials of 3 other fragrances so you know the quality is real.</p>
+                    <div class="card-footer">3 Free Samples Per Person</div>
+                </div>
 
-                 <a href="italian-american.html" class="portal-card">
-                    <h3>The Italian & American Archives</h3>
-                    <p>Bold and charismatic. The definitive collections from Tom Ford, Valentino, Versace, Armani, and Bond No. 9.</p>
-                    <div class="card-footer">Unlock Collection &rarr;</div>
-                </a>
+                 <div class="portal-card">
+                    <h3>The Loyalty Rate</h3>
+                    <p>I always look out for my returning people. After your first pickup, you unlock the Loyalty Rate—$5 off every bottle, for life.</p>
+                    <div class="card-footer">It Pays to be Solid</div>
+                </div>
                  
-                 <a href="avant-garde.html" class="portal-card">
-                    <h3>The Avant-Garde Archives</h3>
-                    <p>Unique and trend-setting. A curated selection of groundbreaking scents from Le Labo, MFK, Byredo, By Kilian, and more.</p>
-                    <div class="card-footer">Unlock Collection &rarr;</div>
-                </a>
+                 <div class="portal-card">
+                    <h3>The Referral Program</h3>
+                    <p>You put your friends on, I put you on. Bring me two new buyers who make a purchase, and you get your next bottle for $25. Simple as that.</p>
+                    <div class="card-footer">Help Your Boys, Help Yourself</div>
+                </div>
             </div>
         </section>
 
-        <!-- The FAQ defense remains critical on the homepage -->
+        <div class="stock-notice">
+            <h3>Current Focus: Fragrances Only</h3>
+            <p>Right now we're all about the scents. Got the best batches of all the classics plus some heat you probably haven't heard of yet.</p>
+        </div>
+
+        <section id="collection">
+            <h2 class="category-title">The Current Collection</h2>
+
+            <!-- Valentino Section -->
+            <div class="brand-section">
+                <a href="valentino.html" class="brand-header">
+                    <div class="brand-logo">VA</div>
+                    <div class="brand-info">
+                        <h3>House of Valentino</h3>
+                        <p>Italian luxury at its finest. The Born in Roma line hits different.</p>
+                    </div>
+                    <div class="brand-stats">
+                        <div class="count">6</div>
+                        <div class="label">Fragrances</div>
+                    </div>
+                </a>
+                <div class="brand-preview">
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Born in Roma Yellow Dream</h5>
+                            <span>$45</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Uomo Born in Roma</h5>
+                            <span>$45</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Donna Born in Roma</h5>
+                            <span>$45</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tom Ford Section -->
+            <div class="brand-section">
+                <a href="tom-ford.html" class="brand-header">
+                    <div class="brand-logo">TF</div>
+                    <div class="brand-info">
+                        <h3>House of Tom Ford</h3>
+                        <p>The king of luxury fragrances. These are the ones that get noticed.</p>
+                    </div>
+                    <div class="brand-stats">
+                        <div class="count">6</div>
+                        <div class="label">Fragrances</div>
+                    </div>
+                </a>
+                <div class="brand-preview">
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Lost Cherry</h5>
+                            <span>$65</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Oud Wood</h5>
+                            <span>$58</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Fucking Fabulous</h5>
+                            <span>$62</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creed Section -->
+            <div class="brand-section">
+                <a href="creed.html" class="brand-header">
+                    <div class="brand-logo">CR</div>
+                    <div class="brand-info">
+                        <h3>House of Creed</h3>
+                        <p>The classics that never go out of style. Aventus speaks for itself.</p>
+                    </div>
+                    <div class="brand-stats">
+                        <div class="count">5</div>
+                        <div class="label">Fragrances</div>
+                    </div>
+                </a>
+                <div class="brand-preview">
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Aventus</h5>
+                            <span>$78</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Green Irish Tweed</h5>
+                            <span>$65</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Viking</h5>
+                            <span>$68</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dior Section -->
+            <div class="brand-section">
+                <a href="dior.html" class="brand-header">
+                    <div class="brand-logo">DI</div>
+                    <div class="brand-info">
+                        <h3>House of Dior</h3>
+                        <p>Sauvage is the people's champion. These are proven crowd-pleasers.</p>
+                    </div>
+                    <div class="brand-stats">
+                        <div class="count">5</div>
+                        <div class="label">Fragrances</div>
+                    </div>
+                </a>
+                <div class="brand-preview">
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Sauvage Elixir</h5>
+                            <span>$55</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Sauvage EDT</h5>
+                            <span>$42</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>J'adore</h5>
+                            <span>$52</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDM Section -->
+            <div class="brand-section">
+                <a href="parfums-de-marly.html" class="brand-header">
+                    <div class="brand-logo">PDM</div>
+                    <div class="brand-info">
+                        <h3>Parfums de Marly</h3>
+                        <p>French niche house with serious presence. Layton and Pegasus are legendary.</p>
+                    </div>
+                    <div class="brand-stats">
+                        <div class="count">5</div>
+                        <div class="label">Fragrances</div>
+                    </div>
+                </a>
+                <div class="brand-preview">
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Layton</h5>
+                            <span>$68</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Pegasus</h5>
+                            <span>$72</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Haltane</h5>
+                            <span>$75</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Le Labo Section -->
+            <div class="brand-section">
+                <a href="le-labo.html" class="brand-header">
+                    <div class="brand-logo">LL</div>
+                    <div class="brand-info">
+                        <h3>Le Labo</h3>
+                        <p>Niche Brooklyn vibes. Santal 33 is the one everyone asks about.</p>
+                    </div>
+                    <div class="brand-stats">
+                        <div class="count">3</div>
+                        <div class="label">Fragrances</div>
+                    </div>
+                </a>
+                <div class="brand-preview">
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Santal 33</h5>
+                            <span>$58</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>Another 13</h5>
+                            <span>$55</span>
+                        </div>
+                    </div>
+                    <div class="preview-item">
+                        <div class="preview-image">📷</div>
+                        <div class="preview-info">
+                            <h5>The Noir 29</h5>
+                            <span>$60</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
         <section id="faq">
-            <h2 class="category-title">Vault Protocol (FAQ)</h2>
+            <h2 class="category-title" id="protocol">The Protocol (FAQ)</h2>
             <div class="faq">
                 <details open>
-                    <summary>How do I acquire an item?</summary>
-                    <p>Access is granted in person only. This site is a private catalog for viewing the archives. See an item you require? Hit me up. All transactions are handled face-to-face.</p>
+                    <summary>How do I get a bottle?</summary>
+                    <p>This is just the catalog. Hit me up in person to make the deal. All pickups are face-to-face, keeps everything clean and simple. No shipping, no online transactions.</p>
                 </details>
                 <details open>
-                    <summary>What is the quality standard?</summary>
-                    <p>Only the definitive 1:1 version of each item is admitted into the vault. I perform the quality control so you don't have to. My reputation is the key to this entire operation.</p>
+                    <summary>How good is the quality?</summary>
+                    <p>These aren't those weak knockoffs. Every bottle performs exactly like retail - same projection, same longevity, same compliments. I only work with suppliers who get it right.</p>
                 </details>
                 <details>
-                    <summary>What is the transaction protocol?</summary>
-                    <p><strong>CASH ONLY.</strong> A cash deposit secures your acquisition request. The remainder is due in cash upon delivery of the asset. This is the only way.</p>
+                    <summary>What about batch codes and authenticity?</summary>
+                    <p>Every bottle has proper batch codes and passes authentication. These come from the same supply chains as authorized retailers, just through different channels.</p>
+                </details>
+                <details>
+                    <summary>Can I request specific fragrances?</summary>
+                    <p>Always down to source new heat if there's demand. Hit me up with what you're looking for and I'll see what I can make happen. Popular requests usually make it into the rotation.</p>
+                </details>
+                <details>
+                    <summary>What's your return policy?</summary>
+                    <p>If a bottle doesn't perform as expected, we'll make it right. That's why first-time buyers get samples - so you know exactly what you're getting before you commit to a full bottle.</p>
                 </details>
             </div>
         </section>
 
         <footer>
-            <p>© 2025 The WascoVault // Private Curation Project</p>
-            <p>For informational & portfolio purposes only. Not an e-commerce site. All acquisitions are coordinated as private, face-to-face group buys.</p>
+            <p>&copy; 2025 WascoVault. Quality guaranteed, satisfaction promised.</p>
         </footer>
     </div>
+
 </body>
 </html>
