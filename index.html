@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WC Archives - Private Lookbook</title>
+    <title>The WascoVault - Private Archives</title>
     <style>
         :root {
             --bg-color: #121212;
             --card-color: #1E1E1E;
             --text-color: #E0E0E0;
-            --accent-color: #D4AF37;
+            --accent-color: #D4AF37; /* Gold for a "vault" feel */
             --accent-gradient: linear-gradient(135deg, #F0E68C 0%, #D4AF37 100%);
             --subtle-text: #9CA3AF;
             --border-color: #333333;
@@ -27,7 +27,6 @@
 
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         
-        /* Navigation Bar Styling */
         .navbar {
             background-color: rgba(30, 30, 30, 0.8);
             border-bottom: 1px solid var(--border-color);
@@ -44,9 +43,6 @@
             font-size: 1.5rem;
             color: var(--text-color);
             text-decoration: none;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         .nav-menu { display: flex; gap: 20px; }
         .nav-link {
@@ -82,7 +78,6 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
-
         .portal-card {
             background-color: var(--card-color);
             border: 1px solid var(--border-color);
@@ -95,85 +90,86 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .portal-card:hover { transform: translateY(-5px); box-shadow: var(--glow); border-color: var(--accent-color);}
-        .portal-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .portal-card p {
-            color: var(--subtle-text);
-            font-size: 0.9rem;
-            flex-grow: 1;
-            margin-bottom: 20px;
-        }
-        .portal-card .card-footer {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--accent-color);
-        }
+        .portal-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--accent-color);}
+        .portal-card p { color: var(--subtle-text); font-size: 0.9rem; flex-grow: 1; margin-bottom: 20px; }
+        .portal-card .card-footer { font-size: 0.9rem; font-weight: 600; color: var(--subtle-text); transition: color 0.2s ease;}
+        .portal-card:hover .card-footer { color: var(--accent-color); }
+
 
         #faq { margin-top: 60px; }
-        /* Add the FAQ styles from the previous version here */
         .faq details { background-color: var(--card-color); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; padding: 10px; }
         .faq summary { font-weight: 600; cursor: pointer; padding: 10px; font-size: 1.1rem; }
         .faq p { padding: 10px 15px 15px 15px; color: var(--subtle-text); border-left: 2px solid var(--accent-color); margin-left: 10px; font-size: 0.95rem; }
-
 
         footer { text-align: center; margin-top: 60px; padding: 30px; color: #6B7280; font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
-    <!-- This Navigation Bar will be on EVERY page -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-brand">THE ARCHIVES</a>
+            <a href="index.html" class="nav-brand">THE WASCOVAULT</a>
             <div class="nav-menu">
-                <a href="chanel-dior.html" class="nav-link">Chanel/Dior</a>
-                <a href="pdm-creed.html" class="nav-link">PdM/Creed</a>
-                <a href="tom-ford.html" class="nav-link">Tom Ford</a>
-                <a href="niche.html" class="nav-link">Niche+</a>
+                <a href="french-houses.html" class="nav-link">French Houses</a>
+                <a href="italian-american.html" class="nav-link">Italian / American</a>
+                <a href="avant-garde.html" class="nav-link">Avant-Garde</a>
             </div>
         </div>
     </nav>
     
     <div class="container">
         <header>
-            <h1>WC Archives</h1>
-            <p>A private, curated lookbook of the definitive 1:1 versions of the world's most iconic fragrances. Sourced for quality.</p>
+            <h1>The WascoVault</h1>
+            <p>A private, curated archive of the definitive versions of the world's most iconic fragrances. Access granted.</p>
         </header>
 
-        <section id="houses">
-            <h2 class="category-title">Explore by House</h2>
+        <section id="the-archives">
+            <h2 class="category-title">Explore The Archives</h2>
             <div class="portal-grid">
 
-                <a href="chanel-dior.html" class="portal-card">
-                    <h3>Chanel & Dior</h3>
-                    <p>The timeless pillars of modern fragrance. The essentials and icons that define classic luxury and sophistication.</p>
-                    <div class="card-footer">View Collection &rarr;</div>
+                <a href="french-houses.html" class="portal-card">
+                    <h3>The French Archives</h3>
+                    <p>The timeless pillars of luxury. Featuring the complete collections of Chanel, Dior, Parfums de Marly, and Creed.</p>
+                    <div class="card-footer">Unlock Collection &rarr;</div>
                 </a>
 
-                 <a href="pdm-creed.html" class="portal-card">
-                    <h3>PdM & Creed</h3>
-                    <p>The undisputed kings of niche performance. For those seeking legendary status, hype, and unparalleled projection.</p>
-                    <div class="card-footer">View Collection &rarr;</div>
+                 <a href="italian-american.html" class="portal-card">
+                    <h3>The Italian & American Archives</h3>
+                    <p>Bold and charismatic. The definitive collections from Tom Ford, Valentino, Versace, Armani, and Bond No. 9.</p>
+                    <div class="card-footer">Unlock Collection &rarr;</div>
                 </a>
                  
-                 <a href="tom-ford.html" class="portal-card">
-                    <h3>Tom Ford</h3>
-                    <p>The definition of modern opulence. Bold, luxurious, and seductive scents that make an unforgettable statement.</p>
-                    <div class="card-footer">View Collection &rarr;</div>
-                </a>
-
-                 <a href="niche.html" class="portal-card">
-                    <h3>Niche & Designer+</h3>
-                    <p>An extensive collection of other iconic houses, including Le Labo, MFK, Valentino, YSL, Byredo, and more.</p>
-                    <div class="card-footer">View Collection &rarr;</div>
+                 <a href="avant-garde.html" class="portal-card">
+                    <h3>The Avant-Garde Archives</h3>
+                    <p>Unique and trend-setting. A curated selection of groundbreaking scents from Le Labo, MFK, Byredo, By Kilian, and more.</p>
+                    <div class="card-footer">Unlock Collection &rarr;</div>
                 </a>
             </div>
         </section>
+
+        <!-- The FAQ defense remains critical on the homepage -->
+        <section id="faq">
+            <h2 class="category-title">Vault Protocol (FAQ)</h2>
+            <div class="faq">
+                <details open>
+                    <summary>How do I acquire an item?</summary>
+                    <p>Access is granted in person only. This site is a private catalog for viewing the archives. See an item you require? Hit me up. All transactions are handled face-to-face.</p>
+                </details>
+                <details open>
+                    <summary>What is the quality standard?</summary>
+                    <p>Only the definitive 1:1 version of each item is admitted into the vault. I perform the quality control so you don't have to. My reputation is the key to this entire operation.</p>
+                </details>
+                <details>
+                    <summary>What is the transaction protocol?</summary>
+                    <p><strong>CASH ONLY.</strong> A cash deposit secures your acquisition request. The remainder is due in cash upon delivery of the asset. This is the only way.</p>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 The WascoVault // Private Curation Project</p>
+            <p>For informational & portfolio purposes only. Not an e-commerce site. All acquisitions are coordinated as private, face-to-face group buys.</p>
+        </footer>
     </div>
 </body>
 </html>
