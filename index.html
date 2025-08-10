@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WC Archives - Private Lookbook</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-color: #1E1E1E;
+            --text-color: #E0E0E0;
+            --accent-color: #D4AF37;
+            --accent-gradient: linear-gradient(135deg, #F0E68C 0%, #D4AF37 100%);
+            --subtle-text: #9CA3AF;
+            --border-color: #333333;
+            --glow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        
+        /* Navigation Bar Styling */
+        .navbar {
+            background-color: rgba(30, 30, 30, 0.8);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .nav-container { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-menu { display: flex; gap: 20px; }
+        .nav-link {
+            color: var(--subtle-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover { color: var(--accent-color); }
+
+        header { text-align: center; padding: 60px 20px; margin-bottom: 40px; }
+        header h1 {
+            font-size: clamp(3rem, 7vw, 4.5rem);
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        header p { color: var(--subtle-text); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            margin: 50px 0 25px 0;
+        }
+        
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .portal-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .portal-card:hover { transform: translateY(-5px); box-shadow: var(--glow); border-color: var(--accent-color);}
+        .portal-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .portal-card p {
+            color: var(--subtle-text);
+            font-size: 0.9rem;
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+        .portal-card .card-footer {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        #faq { margin-top: 60px; }
+        /* Add the FAQ styles from the previous version here */
+        .faq details { background-color: var(--card-color); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; padding: 10px; }
+        .faq summary { font-weight: 600; cursor: pointer; padding: 10px; font-size: 1.1rem; }
+        .faq p { padding: 10px 15px 15px 15px; color: var(--subtle-text); border-left: 2px solid var(--accent-color); margin-left: 10px; font-size: 0.95rem; }
+
+
+        footer { text-align: center; margin-top: 60px; padding: 30px; color: #6B7280; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- This Navigation Bar will be on EVERY page -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">THE ARCHIVES</a>
+            <div class="nav-menu">
+                <a href="chanel-dior.html" class="nav-link">Chanel/Dior</a>
+                <a href="pdm-creed.html" class="nav-link">PdM/Creed</a>
+                <a href="tom-ford.html" class="nav-link">Tom Ford</a>
+                <a href="niche.html" class="nav-link">Niche+</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <header>
+            <h1>WC Archives</h1>
+            <p>A private, curated lookbook of the definitive 1:1 versions of the world's most iconic fragrances. Sourced for quality.</p>
+        </header>
+
+        <section id="houses">
+            <h2 class="category-title">Explore by House</h2>
+            <div class="portal-grid">
+
+                <a href="chanel-dior.html" class="portal-card">
+                    <h3>Chanel & Dior</h3>
+                    <p>The timeless pillars of modern fragrance. The essentials and icons that define classic luxury and sophistication.</p>
+                    <div class="card-footer">View Collection &rarr;</div>
+                </a>
+
+                 <a href="pdm-creed.html" class="portal-card">
+                    <h3>PdM & Creed</h3>
+                    <p>The undisputed kings of niche performance. For those seeking legendary status, hype, and unparalleled projection.</p>
+                    <div class="card-footer">View Collection &rarr;</div>
+                </a>
+                 
+                 <a href="tom-ford.html" class="portal-card">
+                    <h3>Tom Ford</h3>
+                    <p>The definition of modern opulence. Bold, luxurious, and seductive scents that make an unforgettable statement.</p>
+                    <div class="card-footer">View Collection &rarr;</div>
+                </a>
+
+                 <a href="niche.html" class="portal-card">
+                    <h3>Niche & Designer+</h3>
+                    <p>An extensive collection of other iconic houses, including Le Labo, MFK, Valentino, YSL, Byredo, and more.</p>
+                    <div class="card-footer">View Collection &rarr;</div>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
