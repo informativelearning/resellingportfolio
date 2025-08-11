@@ -3,818 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vault - Premium Fragrances</title>
+    <title>The WascoVault</title>
     <style>
         :root {
-            --bg-dark: #000000;
-            --bg-card: #0F0F0F;
-            --accent-gold: #FFD700;
-            --accent-green: #00FF88;
-            --text-white: #FFFFFF;
-            --text-gray: #CCCCCC;
-            --text-dim: #888888;
-            --border-glow: #333333;
-            --danger-red: #FF4444;
-            --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.2);
-            --card-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --bg-primary: #000000;
+            --bg-secondary: #1C1C1E; /* iOS System Gray 6 Dark */
+            --accent-blue: #0A84FF; /* iOS System Blue Dark */
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93; /* iOS System Gray Dark */
+            --border-color: #38383A;   /* iOS System Gray 4 Dark */
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-white);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
+            font-size: 17px; /* iOS Default */
             line-height: 1.4;
-            overflow-x: hidden;
         }
 
-        /* Mobile-first container */
-        .container {
-            max-width: 100%;
-            padding: 0 16px;
-        }
+        .container { padding: 0 16px; max-width: 640px; margin: 0 auto; }
 
-        /* Sticky Header */
+        /* The nav is now more like a subtle iOS header */
         .header {
+            padding: 12px 16px;
+            text-align: center;
+            background: rgba(28, 28, 30, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-glow);
-            padding: 12px 16px;
+            border-bottom: 0.5px solid var(--border-color);
         }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--accent-gold);
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .status-badge {
-            background: var(--accent-green);
-            color: black;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 40px 16px 30px;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 100%);
-        }
-
-        .hero h1 {
-            font-size: 36px;
-            font-weight: 900;
-            margin-bottom: 12px;
-            background: linear-gradient(45deg, var(--accent-gold), #FFF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--text-gray);
-            margin-bottom: 20px;
-        }
-
-        .social-proof {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            padding: 16px;
-            margin: 20px 0;
-        }
-
-        .social-proof-text {
-            font-size: 14px;
-            color: var(--accent-gold);
+        
+        .header h1 {
+            font-size: 17px; /* Standard iOS nav title size */
             font-weight: 600;
         }
 
-        /* Urgency Banner */
-        .urgency-banner {
-            background: var(--danger-red);
-            color: white;
-            text-align: center;
-            padding: 12px;
+        .page-title {
+            padding: 40px 0 20px 0;
+        }
+        .page-title h2 {
+            font-size: 34px; /* iOS Large Title */
             font-weight: 700;
-            font-size: 14px;
-            position: relative;
-            overflow: hidden;
+            letter-spacing: .011em;
         }
-
-        .urgency-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        /* Value Props */
-        .value-props {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin: 30px 0;
-            padding: 0 16px;
-        }
-
-        .value-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            position: relative;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .value-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .value-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
-
-        .value-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent-gold);
-            margin-bottom: 8px;
-        }
-
-        .value-desc {
-            font-size: 14px;
-            color: var(--text-gray);
-            line-height: 1.5;
-        }
-
-        /* Brand Sections */
-        .brand-section {
-            margin: 40px 0;
-        }
-
-        .brand-header {
-            background: linear-gradient(135deg, var(--bg-card) 0%, #1A1A1A 100%);
-            border: 1px solid var(--border-glow);
-            border-radius: 16px;
-            padding: 24px 16px;
-            margin-bottom: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .brand-header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent-gold);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .brand-header:hover::after {
-            transform: scaleX(1);
-        }
-
-        .brand-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-
-        .brand-logo {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-gold);
-            color: black;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 20px;
-        }
-
-        .brand-details h3 {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .brand-tagline {
-            font-size: 14px;
-            color: var(--text-gray);
-        }
-
-        .brand-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 215, 0, 0.05);
-            border-radius: 8px;
-            padding: 12px;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--accent-gold);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            border-color: var(--accent-gold);
-            box-shadow: var(--shadow-glow), var(--card-shadow);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            position: relative;
-        }
-
-        .stock-indicator {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent-green);
-            box-shadow: 0 0 10px var(--accent-green);
-        }
-
-        .low-stock {
-            background: var(--danger-red);
-            box-shadow: 0 0 10px var(--danger-red);
-            animation: pulse 1s infinite;
-        }
-
-        .product-info {
-            padding: 12px;
-        }
-
-        .product-name {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-
-        .price-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: 900;
-            color: var(--accent-gold);
-        }
-
-        .retail-price {
-            font-size: 12px;
-            color: var(--text-dim);
-            text-decoration: line-through;
-        }
-
-        .savings {
-            background: var(--accent-green);
-            color: black;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .scarcity-text {
-            font-size: 11px;
-            color: var(--danger-red);
-            font-weight: 600;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--bg-card) 0%, #1A1A1A 100%);
-            border: 2px solid var(--accent-gold);
-            border-radius: 20px;
-            padding: 30px 20px;
-            margin: 40px 16px;
-            text-align: center;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .cta-title {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--accent-gold);
-            margin-bottom: 12px;
-        }
-
-        .cta-subtitle {
-            font-size: 16px;
-            color: var(--text-gray);
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 14px;
-            color: var(--text-gray);
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            margin: 40px 0;
-            padding: 0 16px;
-        }
-
+        
         .section-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--accent-gold);
+            font-size: 22px; /* iOS Headline */
+            font-weight: 600;
+            margin: 40px 0 15px 0;
         }
 
-        .faq-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
+        .brand-list {
+            list-style: none;
+            background-color: var(--bg-secondary);
             border-radius: 12px;
-            margin-bottom: 12px;
             overflow: hidden;
         }
 
-        .faq-question {
+        .brand-item {
+            border-bottom: 0.5px solid var(--border-color);
+        }
+        .brand-item:last-child {
+            border-bottom: none;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: background-color 0.2s;
+        }
+        
+        .brand-link:active {
+            background-color: #3A3A3C; /* iOS System Gray 5 Dark */
+        }
+        
+        .brand-name {
+            font-weight: 400;
+        }
+
+        .chevron {
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-weight: 200;
+        }
+        
+        .protocol-text {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
             padding: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-        }
-
-        .faq-question::after {
-            content: '+';
-            position: absolute;
-            right: 16px;
-            font-size: 20px;
-            color: var(--accent-gold);
-        }
-
-        .faq-answer {
-            padding: 0 16px 16px;
-            color: var(--text-gray);
-            font-size: 14px;
+            color: var(--text-secondary);
+            font-size: 15px; /* iOS Footnote */
             line-height: 1.5;
-            display: none;
         }
 
-        .faq-item.active .faq-question::after {
-            content: '−';
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-
-        /* Footer */
         .footer {
             text-align: center;
-            padding: 40px 16px 20px;
-            color: var(--text-dim);
-            font-size: 12px;
-            border-top: 1px solid var(--border-glow);
+            padding: 40px 0;
+            color: #636366; /* iOS System Gray 2 Dark */
+            font-size: 13px; /* iOS Caption 2 */
         }
 
-        /* Larger screens - minimal changes */
-        @media (min-width: 768px) {
-            .container { max-width: 480px; margin: 0 auto; }
-            .product-grid { grid-template-columns: 1fr 1fr 1fr; }
-            .value-props { grid-template-columns: 1fr 1fr 1fr; }
-        }
     </style>
 </head>
 <body>
+
     <header class="header">
-        <div class="header-content">
-            <div class="logo">VAULT</div>
-            <div class="status-badge">In Stock</div>
-        </div>
+        <h1>The WascoVault</h1>
     </header>
 
-    <div class="urgency-banner">
-        🔥 Limited Stock Alert - Only 2-5 bottles left per fragrance
-    </div>
-
-    <section class="hero">
-        <h1>Premium Fragrances</h1>
-        <p class="hero-subtitle">Authentic. Premium. Exclusive Access.</p>
-        
-        <div class="social-proof">
-            <div class="social-proof-text">
-                ⭐ 200+ satisfied customers • 98% repeat buyers
-            </div>
-        </div>
-    </section>
-
     <div class="container">
-        <section class="value-props">
-            <div class="value-card">
-                <div class="value-icon">🎁</div>
-                <div class="value-title">First Timer Bonus</div>
-                <div class="value-desc">3 free sample vials with your first purchase. Know the quality before you commit.</div>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">💎</div>
-                <div class="value-title">Loyalty Rewards</div>
-                <div class="value-desc">$5 off every bottle for life after your first purchase. VIP treatment guaranteed.</div>
-            </div>
-            
-            <div class="value-card">
-                <div class="value-icon">🤝</div>
-                <div class="value-title">Referral Program</div>
-                <div class="value-desc">Bring 2 friends, get your next bottle for just $25. Help your crew, help yourself.</div>
+
+        <div class="page-title">
+            <h2>Archives</h2>
+        </div>
+
+        <ul class="brand-list">
+            <li class="brand-item">
+                <a href="chanel.html" class="brand-link">
+                    <span class="brand-name">Chanel</span>
+                    <span class="chevron">&rsaquo;</span>
+                </a>
+            </li>
+            <li class="brand-item">
+                <a href="dior.html" class="brand-link">
+                    <span class="brand-name">Dior</span>
+                    <span class="chevron">&rsaquo;</span>
+                </a>
+            </li>
+            <li class="brand-item">
+                <a href="tom-ford.html" class="brand-link">
+                    <span class="brand-name">Tom Ford</span>
+                    <span class="chevron">&rsaquo;</span>
+                </a>
+            </li>
+            <li class="brand-item">
+                <a href="creed.html" class="brand-link">
+                    <span class="brand-name">Creed</span>
+                    <span class="chevron">&rsaquo;</span>
+                </a>
+            </li>
+            <li class="brand-item">
+                <a href="parfums-de-marly.html" class="brand-link">
+                    <span class="brand-name">Parfums de Marly</span>
+                    <span class="chevron">&rsaquo;</span>
+                </a>
+            </li>
+             <li class="brand-item">
+                <a href="ysl.html" class="brand-link">
+                    <span class="brand-name">YSL</span>
+                    <span class="chevron">&rsaquo;</span>
+                </a>
+            </li>
+            <!-- ... Continue for all other brands in the same list format ... -->
+        </ul>
+
+
+        <section class="protocol-section">
+            <h2 class="section-title">Protocol</h2>
+            <div class="protocol-text">
+                This site is a private catalog for viewing available assets. All acquisitions are handled in person via a cash-only, group-buy model. See an item you require? Contact me directly to confirm availability and coordinate the drop.
             </div>
         </section>
 
-        <!-- Tom Ford - Premium Positioning -->
-        <section class="brand-section">
-            <div class="brand-header">
-                <div class="brand-info">
-                    <div class="brand-logo">TF</div>
-                    <div class="brand-details">
-                        <h3>Tom Ford</h3>
-                        <div class="brand-tagline">The king of luxury. Get noticed.</div>
-                    </div>
-                </div>
-                <div class="brand-stats">
-                    <div class="stat">
-                        <span class="stat-number">6</span>
-                        <span class="stat-label">Available</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">95%</span>
-                        <span class="stat-label">Satisfaction</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">$350+</span>
-                        <span class="stat-label">Retail Value</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        🍒
-                        <div class="stock-indicator low-stock"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Lost Cherry</div>
-                        <div class="price-section">
-                            <div class="price">$65</div>
-                            <div class="savings">Save $285</div>
-                        </div>
-                        <div class="retail-price">Retail: $350</div>
-                        <div class="scarcity-text">⚡ Only 2 left</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        🪵
-                        <div class="stock-indicator"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Oud Wood</div>
-                        <div class="price-section">
-                            <div class="price">$58</div>
-                            <div class="savings">Save $282</div>
-                        </div>
-                        <div class="retail-price">Retail: $340</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        ✨
-                        <div class="stock-indicator low-stock"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Fucking Fabulous</div>
-                        <div class="price-section">
-                            <div class="price">$62</div>
-                            <div class="savings">Save $278</div>
-                        </div>
-                        <div class="retail-price">Retail: $340</div>
-                        <div class="scarcity-text">⚡ Only 3 left</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Creed - Heritage & Status -->
-        <section class="brand-section">
-            <div class="brand-header">
-                <div class="brand-info">
-                    <div class="brand-logo">CR</div>
-                    <div class="brand-details">
-                        <h3>Creed</h3>
-                        <div class="brand-tagline">Timeless classics. Pure status.</div>
-                    </div>
-                </div>
-                <div class="brand-stats">
-                    <div class="stat">
-                        <span class="stat-number">5</span>
-                        <span class="stat-label">Available</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">97%</span>
-                        <span class="stat-label">Satisfaction</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">$400+</span>
-                        <span class="stat-label">Retail Value</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        🍍
-                        <div class="stock-indicator low-stock"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Aventus</div>
-                        <div class="price-section">
-                            <div class="price">$78</div>
-                            <div class="savings">Save $347</div>
-                        </div>
-                        <div class="retail-price">Retail: $425</div>
-                        <div class="scarcity-text">⚡ Only 2 left</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        🌿
-                        <div class="stock-indicator"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Green Irish Tweed</div>
-                        <div class="price-section">
-                            <div class="price">$65</div>
-                            <div class="savings">Save $310</div>
-                        </div>
-                        <div class="retail-price">Retail: $375</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        ⚔️
-                        <div class="stock-indicator"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Viking</div>
-                        <div class="price-section">
-                            <div class="price">$68</div>
-                            <div class="savings">Save $307</div>
-                        </div>
-                        <div class="retail-price">Retail: $375</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dior - Mass Appeal -->
-        <section class="brand-section">
-            <div class="brand-header">
-                <div class="brand-info">
-                    <div class="brand-logo">DI</div>
-                    <div class="brand-details">
-                        <h3>Dior</h3>
-                        <div class="brand-tagline">Crowd favorites. Instant recognition.</div>
-                    </div>
-                </div>
-                <div class="brand-stats">
-                    <div class="stat">
-                        <span class="stat-number">5</span>
-                        <span class="stat-label">Available</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">99%</span>
-                        <span class="stat-label">Satisfaction</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">#1</span>
-                        <span class="stat-label">Bestseller</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        🌊
-                        <div class="stock-indicator"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Sauvage Elixir</div>
-                        <div class="price-section">
-                            <div class="price">$55</div>
-                            <div class="savings">Save $115</div>
-                        </div>
-                        <div class="retail-price">Retail: $170</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        💙
-                        <div class="stock-indicator"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">Sauvage EDT</div>
-                        <div class="price-section">
-                            <div class="price">$42</div>
-                            <div class="savings">Save $88</div>
-                        </div>
-                        <div class="retail-price">Retail: $130</div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        💐
-                        <div class="stock-indicator low-stock"></div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-name">J'adore</div>
-                        <div class="price-section">
-                            <div class="price">$52</div>
-                            <div class="savings">Save $108</div>
-                        </div>
-                        <div class="retail-price">Retail: $160</div>
-                        <div class="scarcity-text">⚡ Only 4 left</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="cta-title">Ready to Upgrade?</div>
-            <div class="cta-subtitle">In-person deals only. Quality guaranteed.</div>
-            <div class="contact-info">
-                Hit me up directly to secure your bottles<br>
-                Face-to-face pickups • No shipping • No online orders
-            </div>
-        </section>
-
-        <section class="faq-section">
-            <h2 class="section-title">The Protocol</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">How do I buy?</div>
-                <div class="faq-answer">Contact me directly. All transactions are in-person, cash only. Keeps everything simple and builds trust.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Are these authentic?</div>
-                <div class="faq-answer">100% authentic with proper batch codes. Same performance as retail, guaranteed. First-timers get samples to prove quality.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Why are prices so low?</div>
-                <div class="faq-answer">Different supply chain, same product. I cut out the middleman and retail markup. You get authentic luxury at fair prices.</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">What if I'm not satisfied?</div>
-                <div class="faq-answer">We'll make it right. Quality is everything to me. That's why samples come first - so you know exactly what you're getting.</div>
-            </div>
-        </section>
     </div>
 
     <footer class="footer">
-        © 2025 Vault • Premium fragrances • Quality guaranteed
+        WascoVault Curation Project<br>
+        <span style="font-size: 11px;">For Informational Purposes Only</span>
     </footer>
-
-    <script>
-        // FAQ Toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                // Close all other FAQ items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Toggle current item
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
-            });
-        });
-
-        // Dynamic stock updates (psychological pressure)
-        function updateStockIndicators() {
-            const lowStockElements = document.querySelectorAll('.low-stock');
-            lowStockElements.forEach(element => {
-                if (Math.random() < 0.1) { // 10% chance to change
-                    element.classList.toggle('low-stock');
-                    setTimeout(() => {
-                        element.classList.toggle('low-stock');
-                    }, 5000);
-                }
-            });
-        }
-        
-        setInterval(updateStockIndicators, 30000); // Update every 30 seconds
-    </script>
+    
 </body>
 </html>
