@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Ford - The Vault</title>
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #1C1C1E;
+            --accent-blue: #0A84FF;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border-color: #38383A;
+            --price-color: #30D158;
+            --warning-color: #FF9F0A;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            font-size: 17px;
+            line-height: 1.4;
+        }
+        .container { padding: 0 16px; max-width: 640px; margin: 0 auto; }
+        .header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            background: rgba(28, 28, 30, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 0.5px solid var(--border-color);
+        }
+        .back-button { color: var(--accent-blue); text-decoration: none; font-size: 17px; margin-right: 16px; }
+        .header h1 { font-size: 17px; font-weight: 600; }
+        .page-title { padding: 40px 0 20px 0; }
+        .page-title h2 { font-size: 34px; font-weight: 700; letter-spacing: .011em; }
+        .trust-banner {
+            background: linear-gradient(135deg, rgba(48, 209, 88, 0.15), rgba(10, 132, 255, 0.15));
+            border: 1px solid rgba(48, 209, 88, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .trust-banner h3 { color: var(--price-color); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .trust-features { display: flex; justify-content: space-around; font-size: 12px; color: var(--text-secondary); }
+        .trust-features span { display: flex; align-items: center; gap: 4px; }
+        .products-list { list-style: none; background-color: var(--bg-secondary); border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+        .product-item { border-bottom: 0.5px solid var(--border-color); }
+        .product-item:last-child { border-bottom: none; }
+        .product-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; cursor: pointer; transition: background-color 0.2s; }
+        .product-header:active { background-color: #3A3A3C; }
+        .product-info { flex: 1; }
+        .product-name { font-weight: 500; margin-bottom: 2px; }
+        .product-size { font-size: 14px; color: var(--text-secondary); }
+        .product-price { font-size: 17px; font-weight: 600; color: var(--price-color); margin-right: 12px; }
+        .chevron { font-size: 15px; color: var(--text-secondary); font-weight: 200; transition: transform 0.2s; }
+        .product-item.expanded .chevron { transform: rotate(90deg); }
+        .product-details { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: #2C2C2E; }
+        .product-item.expanded .product-details { max-height: 800px; }
+        .details-content { padding: 20px 16px; }
+        .product-description { font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+        .contact-button { background-color: var(--accent-blue); color: white; border: none; border-radius: 8px; padding: 12px 24px; font-size: 16px; font-weight: 600; width: 100%; cursor: pointer; margin-top: 8px; }
+        .contact-button:hover { background-color: #0056CC; }
+        .contact-button.secondary { background-color: transparent; color: var(--accent-blue); border: 1px solid var(--accent-blue); margin-top: 8px; }
+        .availability-status { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 14px; }
+        .status-indicator { width: 8px; height: 8px; border-radius: 50%; background-color: var(--price-color); }
+        .fulfillment-badge { display: inline-block; background-color: rgba(48, 209, 88, 0.2); color: var(--price-color); padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+        .footer { text-align: center; padding: 40px 0; color: #636366; font-size: 13px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal { background-color: var(--bg-secondary); border-radius: 12px; padding: 24px; margin: 16px; max-width: 400px; width: 100%; }
+        .modal h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: center; }
+        .modal p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+        .modal-buttons { display: flex; gap: 12px; }
+        .modal-buttons button { flex: 1; padding: 12px; border-radius: 8px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .modal-buttons .confirm { background-color: var(--accent-blue); color: white; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="back-button">‹ Back</a>
+        <h1>Tom Ford</h1>
+    </header>
+
+    <div class="container">
+        <div class="page-title"><h2>Collection</h2></div>
+        <div class="trust-banner">
+            <h3>✓ Verified Authentic • Direct Source Guarantee</h3>
+            <div class="trust-features">
+                <span>🔒 Cash on Delivery</span>
+                <span>📦 Physical Handover</span>
+                <span>⚡ 7-Day Fulfillment</span>
+            </div>
+        </div>
+
+        <ul class="products-list">
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Fucking Fabulous</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$130</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">An explicit, exclusive, and fabulous leather scent. Notes of clary sage and rich leather create a decadent and bold statement.</div>
+                    <button class="contact-button" onclick="initiateContact('Fucking Fabulous', 'EDP • 100ml', '$130')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Oud Wood</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$125</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A masterful composition of exotic, smoky woods. Rare oud wood, sandalwood, and vetiver create a rich and compelling classic.</div>
+                    <button class="contact-button" onclick="initiateContact('Oud Wood', 'EDP • 100ml', '$125')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Tobacco Vanille</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$125</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">Opulent, warm, and iconic. A modern take on an old-world gentleman's club with creamy tonka bean, vanilla, cocoa, and sweet wood sap.</div>
+                    <button class="contact-button" onclick="initiateContact('Tobacco Vanille', 'EDP • 100ml', '$125')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Lost Cherry</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$130</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A luscious and insatiable gourmand scent. Black cherry, bitter almond, and a touch of liqueur create a tempting, candy-like glow.</div>
+                    <button class="contact-button" onclick="initiateContact('Lost Cherry', 'EDP • 100ml', '$130')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Bitter Peach</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$130</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">Explicitly sweet and dangerously voluptuous. Bitter Peach surges with dark, skin-gripping sensuality featuring notes of vine-ripened peach and blood orange.</div>
+                    <button class="contact-button" onclick="initiateContact('Bitter Peach', 'EDP • 100ml', '$130')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Ombré Leather</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$115</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">Vast, untethered, and driven. A deeply textural scent that combines black leather with floral notes of jasmine sambac for a distinctive, addictive experience.</div>
+                    <button class="contact-button" onclick="initiateContact('Ombré Leather', 'EDP • 100ml', '$115')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">White Suede</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$120</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A charming and irresistible musk fragrance. The surprising duality of musk and suede gives a beautiful new dimension to a classic ingredient.</div>
+                    <button class="contact-button" onclick="initiateContact('White Suede', 'EDP • 100ml', '$120')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Neroli Portofino</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$120</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A vibrant, sparkling, and transportive scent. This eau de parfum captures the cool breezes, sparkling clear water, and lush foliage of the Italian Riviera.</div>
+                    <button class="contact-button" onclick="initiateContact('Neroli Portofino', 'EDP • 100ml', '$120')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Café Rose</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$110</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A sensual, untamed, and refined scent. Captures the wild sensuality of a refined rose infused with an unexpected twist of dark coffee.</div>
+                    <button class="contact-button" onclick="initiateContact('Café Rose', 'EDP • 100ml', '$110')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Jasmin Rouge</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$125</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A voluptuous, spiced floral. This unexpectedly bold scent blends precious jasmine sambac with dusky clary sage and rich spices.</div>
+                    <button class="contact-button" onclick="initiateContact('Jasmin Rouge', 'EDP • 100ml', '$125')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Vanille Fatale</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$125</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A compelling force of nature in a bottle. The stirring spice of saffron and coriander opens the scent, followed by a heart of roasted coffee absolute and vanilla.</div>
+                    <button class="contact-button" onclick="initiateContact('Vanille Fatale', 'EDP • 100ml', '$125')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Vanilla Sex</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$130</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">An unapologetically glamorous and sensual experience. This fragrance is an enthralling blend of vanilla notes and mysterious florals.</div>
+                    <button class="contact-button" onclick="initiateContact('Vanilla Sex', 'EDP • 100ml', '$130')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Tobacco Oud</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$125</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A regal and rich fragrance that merges primal oud with an idealized Arabian tobacco accord. A warm, woody, and addictive scent.</div>
+                    <button class="contact-button" onclick="initiateContact('Tobacco Oud', 'EDP • 100ml', '$125')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Oud Minérale</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$120</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A dramatic and elemental scent that merges rich oud with the freshness of the ocean. A surge of smokey woods and oceanic minerals.</div>
+                    <button class="contact-button" onclick="initiateContact('Oud Minérale', 'EDP • 100ml', '$120')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal">
+            <h3>Our Process</h3>
+            <p><strong>1. Select a Fragrance</strong><br>Browse our curated catalog and find the item you wish to acquire.</p>
+            <p><strong>2. Initiate Contact</strong><br>Click "Contact to Acquire". This opens your email client to send us a direct inquiry about the item.</p>
+            <p><strong>3. Arrange Handover</strong><br>We will reply to your email to arrange a time and public place for the physical handover.</p>
+            <p><strong>4. In-Person Exchange</strong><br>Inspect your authentic fragrance and complete the transaction with cash. Simple and secure.</p>
+            <div class="modal-buttons"><button class="confirm" onclick="closeModal()" style="width: 100%;">Got It</button></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        WascoVault Curation Project<br>
+        <span style="font-size: 11px;">Authentic Luxury Fragrances • Direct Source Guarantee</span>
+    </footer>
+    
+    <script>
+        function toggleProduct(header) {
+            const item = header.parentElement;
+            const wasExpanded = item.classList.contains('expanded');
+            document.querySelectorAll('.product-item.expanded').forEach(expandedItem => {
+                if (expandedItem !== item) {
+                    expandedItem.classList.remove('expanded');
+                }
+            });
+            item.classList.toggle('expanded');
+        }
+
+        function initiateContact(name, size, price) {
+            const recipientEmail = "contact@wascovault.com"; // IMPORTANT: Change to your email
+            const subject = `Inquiry for: ${name}`;
+            const body = `Hello,\n\nI'm interested in acquiring the following item from your catalog:\n\nProduct: ${name}\nSize: ${size}\nPrice: ${price}\n\nPlease let me know the next steps for arranging a physical handover.\n\nThank you.`;
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        }
+
+        function showInfoModal() {
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+        
+        document.getElementById('infoModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+    </script>
+</body>
+</html>
