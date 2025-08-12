@@ -8,17 +8,14 @@
         :root {
             --bg-primary: #000000;
             --bg-secondary: #1C1C1E;
-            --accent-red: #FF3B30;
-            --accent-gold: #FFD700;
+            --accent-blue: #0A84FF;
             --text-primary: #FFFFFF;
             --text-secondary: #8E8E93;
             --border-color: #38383A;
             --price-color: #30D158;
             --warning-color: #FF9F0A;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
             background-color: var(--bg-primary);
@@ -27,9 +24,7 @@
             font-size: 17px;
             line-height: 1.4;
         }
-
         .container { padding: 0 16px; max-width: 640px; margin: 0 auto; }
-
         .header {
             padding: 12px 16px;
             display: flex;
@@ -42,377 +37,62 @@
             z-index: 1000;
             border-bottom: 0.5px solid var(--border-color);
         }
-        
-        .back-button {
-            color: var(--accent-red);
-            text-decoration: none;
-            font-size: 17px;
-            margin-right: 16px;
-        }
-        
-        .header h1 {
-            font-size: 17px;
-            font-weight: 600;
-        }
-
-        .page-title {
-            padding: 40px 0 20px 0;
-        }
-        .page-title h2 {
-            font-size: 34px;
-            font-weight: 700;
-            letter-spacing: .011em;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
+        .back-button { color: var(--accent-blue); text-decoration: none; font-size: 17px; margin-right: 16px; }
+        .header h1 { font-size: 17px; font-weight: 600; }
+        .page-title { padding: 40px 0 20px 0; }
+        .page-title h2 { font-size: 34px; font-weight: 700; letter-spacing: .011em; }
         .trust-banner {
-            background: linear-gradient(135deg, rgba(255, 59, 48, 0.15), rgba(255, 215, 0, 0.15));
-            border: 1px solid rgba(255, 59, 48, 0.3);
+            background: linear-gradient(135deg, rgba(48, 209, 88, 0.15), rgba(10, 132, 255, 0.15));
+            border: 1px solid rgba(48, 209, 88, 0.3);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 24px;
             text-align: center;
         }
-
-        .trust-banner h3 {
-            color: var(--accent-red);
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .trust-features {
-            display: flex;
-            justify-content: space-around;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .trust-features span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .products-list {
-            list-style: none;
-            background-color: var(--bg-secondary);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        .product-item {
-            border-bottom: 0.5px solid var(--border-color);
-        }
-        .product-item:last-child {
-            border-bottom: none;
-        }
-
-        .product-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .product-header:active {
-            background-color: #3A3A3C;
-        }
-        
-        .product-info {
-            flex: 1;
-        }
-        
-        .product-name {
-            font-weight: 500;
-            margin-bottom: 2px;
-        }
-        
-        .product-size {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        
-        .product-price {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--price-color);
-            margin-right: 12px;
-        }
-
-        .chevron {
-            font-size: 15px;
-            color: var(--text-secondary);
-            font-weight: 200;
-            transition: transform 0.2s;
-        }
-        
-        .product-item.expanded .chevron {
-            transform: rotate(90deg);
-        }
-
-        .product-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background-color: #2C2C2E;
-        }
-        
-        .product-item.expanded .product-details {
-            max-height: 600px;
-        }
-        
-        .details-content {
-            padding: 20px 16px;
-        }
-        
-        .image-carousel {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
-        .carousel-container {
-            display: flex;
-            overflow-x: scroll;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-        
-        .carousel-container::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .carousel-image {
-            flex: 0 0 100%;
-            height: 200px;
-            background-color: #3A3A3C;
-            border-radius: 8px;
-            scroll-snap-align: start;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-right: 8px;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23444"/><text x="50" y="50" text-anchor="middle" dy="0.3em" fill="%23888" font-family="system-ui" font-size="12">Image Placeholder</text></svg>');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .image-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--text-secondary);
-            opacity: 0.3;
-            transition: opacity 0.2s;
-        }
-        
-        .dot.active {
-            opacity: 1;
-            background-color: var(--accent-red);
-        }
-        
-        .product-description {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .pre-order-info {
-            background-color: rgba(255, 159, 10, 0.1);
-            border: 1px solid rgba(255, 159, 10, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: var(--warning-color);
-        }
-
-        .pre-order-info strong {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 14px;
-        }
-        
-        .contact-button {
-            background-color: var(--accent-red);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        .contact-button:hover {
-            background-color: #D70015;
-        }
-
-        .contact-button.secondary {
-            background-color: transparent;
-            color: var(--accent-red);
-            border: 1px solid var(--accent-red);
-            margin-top: 8px;
-        }
-        
-        .availability-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-        
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--warning-color);
-        }
-        
-        .delivery-info {
-            background-color: rgba(255, 59, 48, 0.1);
-            border: 1px solid rgba(255, 59, 48, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            color: var(--accent-red);
-        }
-        
-        .fulfillment-badge {
-            display: inline-block;
-            background-color: rgba(48, 209, 88, 0.2);
-            color: var(--price-color);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .commitment-section {
-            background-color: rgba(255, 59, 48, 0.05);
-            border: 1px solid rgba(255, 59, 48, 0.2);
-            border-radius: 8px;
-            padding: 14px;
-            margin-bottom: 16px;
-        }
-
-        .commitment-section h4 {
-            color: var(--accent-red);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .commitment-section p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #636366;
-            font-size: 13px;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal {
-            background-color: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 24px;
-            margin: 16px;
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .modal h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .modal p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .modal-buttons button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .modal-buttons .confirm {
-            background-color: var(--accent-red);
-            color: white;
-        }
-
-        .modal-buttons .cancel {
-            background-color: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-        }
-
-        .collection-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-left: 8px;
-        }
-
+        .trust-banner h3 { color: var(--price-color); font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .trust-features { display: flex; justify-content: space-around; font-size: 12px; color: var(--text-secondary); }
+        .trust-features span { display: flex; align-items: center; gap: 4px; }
+        .products-list { list-style: none; background-color: var(--bg-secondary); border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+        .product-item { border-bottom: 0.5px solid var(--border-color); }
+        .product-item:last-child { border-bottom: none; }
+        .product-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; cursor: pointer; transition: background-color 0.2s; }
+        .product-header:active { background-color: #3A3A3C; }
+        .product-info { flex: 1; }
+        .product-name { font-weight: 500; margin-bottom: 2px; }
+        .product-size { font-size: 14px; color: var(--text-secondary); }
+        .product-price { font-size: 17px; font-weight: 600; color: var(--price-color); margin-right: 12px; }
+        .chevron { font-size: 15px; color: var(--text-secondary); font-weight: 200; transition: transform 0.2s; }
+        .product-item.expanded .chevron { transform: rotate(90deg); }
+        .product-details { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: #2C2C2E; }
+        .product-item.expanded .product-details { max-height: 800px; }
+        .details-content { padding: 20px 16px; }
+        .image-carousel { position: relative; margin-bottom: 20px; }
+        .carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-image { flex: 0 0 100%; height: 200px; background-color: #3A3A3C; border-radius: 8px; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; margin-right: 8px; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23444"/><text x="50" y="50" text-anchor="middle" dy="0.3em" fill="%23888" font-family="system-ui" font-size="12">Image Placeholder</text></svg>'); background-size: cover; background-position: center; }
+        .image-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--text-secondary); opacity: 0.3; transition: opacity 0.2s; }
+        .dot.active { opacity: 1; background-color: var(--accent-blue); }
+        .product-description { font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+        .pre-order-info { background-color: rgba(255, 159, 10, 0.1); border: 1px solid rgba(255, 159, 10, 0.3); border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 13px; color: var(--warning-color); }
+        .pre-order-info strong { display: block; margin-bottom: 4px; font-size: 14px; }
+        .contact-button { background-color: var(--accent-blue); color: white; border: none; border-radius: 8px; padding: 12px 24px; font-size: 16px; font-weight: 600; width: 100%; cursor: pointer; margin-top: 8px; }
+        .contact-button:hover { background-color: #0056CC; }
+        .contact-button.secondary { background-color: transparent; color: var(--accent-blue); border: 1px solid var(--accent-blue); margin-top: 8px; }
+        .availability-status { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 14px; }
+        .status-indicator { width: 8px; height: 8px; border-radius: 50%; background-color: var(--price-color); }
+        .fulfillment-badge { display: inline-block; background-color: rgba(48, 209, 88, 0.2); color: var(--price-color); padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+        .commitment-section { background-color: rgba(10, 132, 255, 0.05); border: 1px solid rgba(10, 132, 255, 0.2); border-radius: 8px; padding: 14px; margin-bottom: 16px; }
+        .commitment-section h4 { color: var(--accent-blue); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .commitment-section p { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+        .footer { text-align: center; padding: 40px 0; color: #636366; font-size: 13px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal { background-color: var(--bg-secondary); border-radius: 12px; padding: 24px; margin: 16px; max-width: 400px; width: 100%; }
+        .modal h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: center; }
+        .modal p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+        .modal-buttons { display: flex; gap: 12px; }
+        .modal-buttons button { flex: 1; padding: 12px; border-radius: 8px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .modal-buttons .confirm { background-color: var(--accent-blue); color: white; }
     </style>
 </head>
 <body>
@@ -423,382 +103,172 @@
     </header>
 
     <div class="container">
-
-        <div class="page-title">
-            <h2>Collection</h2>
-        </div>
-
+        <div class="page-title"><h2>Collection</h2></div>
         <div class="trust-banner">
             <h3>✓ Verified Authentic • Direct Source Guarantee</h3>
             <div class="trust-features">
-                <span>🔒 Pay on Delivery</span>
-                <span>📦 Tracked Shipping</span>
+                <span>🔒 Cash on Delivery</span>
+                <span>📦 Physical Handover</span>
                 <span>⚡ 7-Day Fulfillment</span>
             </div>
         </div>
 
+        <!-- IMPORTANT: Please review and update the product names, sizes, prices, and descriptions below. These are placeholders based on the provided list. -->
         <ul class="products-list">
+            
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Born in Roma Donna <span class="collection-badge">New</span></div>
-                        <div class="product-size">EDP • 100ml</div>
-                    </div>
-                    <div class="product-price">$95</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Donna Born in Roma</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$95</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">Born in Roma Donna - Main</div>
-                                <div class="carousel-image">Born in Roma Donna - Detail</div>
-                                <div class="carousel-image">Born in Roma Donna - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            A modern floral fragrance that captures the essence of Roman elegance. Notes of jasmine, vanilla, and white tea create a sophisticated and contemporary scent.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Born in Roma Donna', 'EDP • 100ml', '$95')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
-                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A modern floral fragrance that captures the essence of Roman elegance with notes of jasmine, vanilla, and white tea.</div>
+                    <button class="contact-button" onclick="initiateContact('Donna Born in Roma', 'EDP • 100ml', '$95')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Born in Roma Uomo <span class="collection-badge">Intense</span></div>
-                        <div class="product-size">EDP • 100ml</div>
-                    </div>
-                    <div class="product-price">$95</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Uomo Born in Roma</div><div class="product-size">EDT • 100ml</div></div>
+                    <div class="product-price">$95</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">Born in Roma Uomo - Main</div>
-                                <div class="carousel-image">Born in Roma Uomo - Detail</div>
-                                <div class="carousel-image">Born in Roma Uomo - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            Bold and masculine fragrance with notes of violet leaf, ginger, and vetiver. An intense expression of Roman sophistication and strength.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Born in Roma Uomo', 'EDP • 100ml', '$95')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
-                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A vibrant and masculine fragrance with notes of mineral salt, violet leaf, and vetiver for a modern, edgy signature.</div>
+                    <button class="contact-button" onclick="initiateContact('Uomo Born in Roma', 'EDT • 100ml', '$95')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Born in Roma The Gold <span class="collection-badge">Limited</span></div>
-                        <div class="product-size">EDP • 100ml</div>
-                    </div>
-                    <div class="product-price">$105</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Donna Born in Roma Intense</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$105</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">The Gold - Main</div>
-                                <div class="carousel-image">The Gold - Detail</div>
-                                <div class="carousel-image">The Gold - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            Luxurious golden edition with rich amber, saffron, and precious woods. A rare and opulent expression of Roman grandeur.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Born in Roma The Gold', 'EDP • 100ml', '$105')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
-                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A deeper, more sensual version of the original, amplifying the vanilla and jasmine notes for a magnetic and addictive trail.</div>
+                    <button class="contact-button" onclick="initiateContact('Donna Born in Roma Intense', 'EDP • 100ml', '$105')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Born in Roma Pink PP <span class="collection-badge">Exclusive</span></div>
-                        <div class="product-size">EDP • 100ml</div>
-                    </div>
-                    <div class="product-price">$98</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Uomo Born in Roma Intense</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$105</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">Pink PP - Main</div>
-                                <div class="carousel-image">Pink PP - Detail</div>
-                                <div class="carousel-image">Pink PP - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            Playful pink edition with cherry blossom, peony, and soft musk. A vibrant and youthful interpretation of Roman femininity.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Born in Roma Pink PP', 'EDP • 100ml', '$98')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">An intense and charismatic scent that pushes the vetiver and vanilla infusion to new heights, creating a powerful statement.</div>
+                    <button class="contact-button" onclick="initiateContact('Uomo Born in Roma Intense', 'EDP • 100ml', '$105')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Born in Roma Yellow Dream</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$98</div><span class="chevron">&rsaquo;</span>
                 </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A fresh floral musk with bright notes of Italian lemon and Damascan rose, evoking the golden light of Rome.</div>
+                    <button class="contact-button" onclick="initiateContact('Born in Roma Yellow Dream', 'EDP • 100ml', '$98')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Yellow Dream <span class="collection-badge">Fresh</span></div>
-                        <div class="product-size">EDP • 100ml</div>
-                    </div>
-                    <div class="product-price">$92</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Born in Roma Green Stravaganza</div><div class="product-size">EDT • 100ml</div></div>
+                    <div class="product-price">$98</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">Yellow Dream - Main</div>
-                                <div class="carousel-image">Yellow Dream - Detail</div>
-                                <div class="carousel-image">Yellow Dream - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            Sunny and optimistic fragrance with citrus burst, mimosa, and white woods. Captures the warmth and joy of Italian summers.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Yellow Dream', 'EDP • 100ml', '$92')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">An extravagant and bold scent featuring lapsang souchong tea accord and jasmine absolute for a smoky, floral adventure.</div>
+                    <button class="contact-button" onclick="initiateContact('Born in Roma Green Stravaganza', 'EDT • 100ml', '$98')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Born in Roma Coral Fantasy</div><div class="product-size">EDT • 100ml</div></div>
+                    <div class="product-price">$98</div><span class="chevron">&rsaquo;</span>
                 </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A fruity amber fragrance inspired by Rome's coral-sky sunsets, with notes of red apple, sage, and tobacco.</div>
+                    <button class="contact-button" onclick="initiateContact('Born in Roma Coral Fantasy', 'EDT • 100ml', '$98')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
+            
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Born in Roma Pink PP</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$110</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A vibrant and exclusive edition featuring a blend of Calabrian bergamot and bourbon vanilla. A true collector's item.</div>
+                    <button class="contact-button" onclick="initiateContact('Born in Roma Pink PP', 'EDP • 100ml', '$110')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Green Stravaganza <span class="collection-badge">Fresh</span></div>
-                        <div class="product-size">EDT • 100ml</div>
-                    </div>
-                    <div class="product-price">$88</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Uomo Born in Roma The Gold</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$115</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">Green Stravaganza - Main</div>
-                                <div class="carousel-image">Green Stravaganza - Detail</div>
-                                <div class="carousel-image">Green Stravaganza - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            Vibrant green fragrance with basil, bergamot, and cedar. A fresh and energetic scent that embodies natural Italian elegance.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Green Stravaganza', 'EDT • 100ml', '$88')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
-                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A limited edition celebrating luxury with rich spices and an ambery, woody base. The pinnacle of the collection.</div>
+                    <button class="contact-button" onclick="initiateContact('Uomo Born in Roma The Gold', 'EDP • 100ml', '$115')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
             <li class="product-item">
                 <div class="product-header" onclick="toggleProduct(this)">
-                    <div class="product-info">
-                        <div class="product-name">Coral Fantasy <span class="collection-badge">Limited</span></div>
-                        <div class="product-size">EDT • 100ml</div>
-                    </div>
-                    <div class="product-price">$90</div>
-                    <span class="chevron">&rsaquo;</span>
+                    <div class="product-info"><div class="product-name">Valentino Donna</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$90</div><span class="chevron">&rsaquo;</span>
                 </div>
-                <div class="product-details">
-                    <div class="details-content">
-                        <div class="image-carousel">
-                            <div class="carousel-container">
-                                <div class="carousel-image">Coral Fantasy - Main</div>
-                                <div class="carousel-image">Coral Fantasy - Detail</div>
-                                <div class="carousel-image">Coral Fantasy - Packaging</div>
-                            </div>
-                            <div class="image-dots">
-                                <div class="dot active"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div>
-                        <div class="availability-status">
-                            <div class="status-indicator"></div>
-                            <span>Available - 7 Day Delivery Promise</span>
-                        </div>
-                        <div class="pre-order-info">
-                            <strong>Pre-Order Process</strong>
-                            Reserve now → We source directly → Delivered within 7 days → Pay on delivery
-                        </div>
-                        <div class="product-description">
-                            Exotic coral-inspired fragrance with tropical fruits, hibiscus, and vanilla. A dreamy escape to Mediterranean shores.
-                        </div>
-                        <div class="commitment-section">
-                            <h4>Our Commitment</h4>
-                            <p>We partner directly with authorized retailers to guarantee authenticity. Your order is only fulfilled from verified sources, ensuring you receive genuine Valentino fragrances every time.</p>
-                        </div>
-                        <button class="contact-button" onclick="showOrderModal('Coral Fantasy', 'EDT • 100ml', '$90')">Reserve & Order</button>
-                        <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
-                    </div>
-                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">The classic Valentino Donna. A timeless floral chypre fragrance with notes of iris, patchouli, and vanilla.</div>
+                    <button class="contact-button" onclick="initiateContact('Valentino Donna', 'EDP • 100ml', '$90')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
             </li>
 
+            <li class="product-item">
+                <div class="product-header" onclick="toggleProduct(this)">
+                    <div class="product-info"><div class="product-name">Valentino Uomo Intense</div><div class="product-size">EDP • 100ml</div></div>
+                    <div class="product-price">$100</div><span class="chevron">&rsaquo;</span>
+                </div>
+                <div class="product-details"><div class="details-content">
+                    <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
+                    <div class="product-description">A deep and unforgettable leathery fragrance. Features notes of black leather, iris, and tonka bean for a profoundly Italian scent.</div>
+                    <button class="contact-button" onclick="initiateContact('Valentino Uomo Intense', 'EDP • 100ml', '$100')">Contact to Acquire</button>
+                    <button class="contact-button secondary" onclick="showInfoModal()">How It Works</button>
+                </div></div>
+            </li>
         </ul>
-
     </div>
 
-    <!-- Order Confirmation Modal -->
-    <div id="orderModal" class="modal-overlay">
-        <div class="modal">
-            <h3>Confirm Your Order</h3>
-            <p id="orderDetails"></p>
-            <p><strong>Next Steps:</strong></p>
-            <p style="font-size: 13px; margin-bottom: 20px;">
-                1. We'll source your fragrance from our trusted network<br>
-                2. You'll receive tracking information within 24 hours<br>
-                3. Delivery within 7 days - pay when you receive it<br>
-                4. 100% satisfaction guaranteed
-            </p>
-            <div class="modal-buttons">
-                <button class="cancel" onclick="closeModal()">Cancel</button>
-                <button class="confirm" onclick="confirmOrder()">Confirm Order</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Info Modal -->
     <div id="infoModal" class="modal-overlay">
         <div class="modal">
-            <h3>How Our Process Works</h3>
-            <p style="margin-bottom: 16px;">
-                <strong>1. Reserve Your Fragrance</strong><br>
-                Click "Reserve & Order" to secure your selection
-            </p>
-            <p style="margin-bottom: 16px;">
-                <strong>2. We Source Directly</strong><br>
-                We work with authorized retailers to ensure 100% authenticity
-            </p>
-            <p style="margin-bottom: 16px;">
-                <strong>3. Track Your Order</strong><br>
-                Receive updates and tracking info within 24 hours
-            </p>
-            <p style="margin-bottom: 20px;">
-                <strong>4. Pay on Delivery</strong><br>
-                Only pay when your authentic Valentino fragrance arrives at your door
-            </p>
-            <div class="modal-buttons">
-                <button class="confirm" onclick="closeModal()" style="width: 100%;">Got It</button>
-            </div>
+            <h3>Our Process</h3>
+            <p><strong>1. Select a Fragrance</strong><br>Browse our curated catalog and find the item you wish to acquire.</p>
+            <p><strong>2. Initiate Contact</strong><br>Click "Contact to Acquire". This opens your email client to send us a direct inquiry about the item.</p>
+            <p><strong>3. Arrange Handover</strong><br>We will reply to your email to arrange a time and public place for the physical handover.</p>
+            <p><strong>4. In-Person Exchange</strong><br>Inspect your authentic fragrance and complete the transaction with cash. Simple and secure.</p>
+            <div class="modal-buttons"><button class="confirm" onclick="closeModal()" style="width: 100%;">Got It</button></div>
         </div>
     </div>
 
@@ -808,64 +278,23 @@
     </footer>
     
     <script>
-        let selectedProduct = {};
-
         function toggleProduct(header) {
             const item = header.parentElement;
             const wasExpanded = item.classList.contains('expanded');
-            
-            // Close all other expanded items
             document.querySelectorAll('.product-item.expanded').forEach(expandedItem => {
                 if (expandedItem !== item) {
                     expandedItem.classList.remove('expanded');
                 }
             });
-            
-            // Toggle current item
             item.classList.toggle('expanded');
-            
-            // Handle carousel dots if expanded
-            if (item.classList.contains('expanded')) {
-                setupCarousel(item);
-            }
-        }
-        
-        function setupCarousel(item) {
-            const container = item.querySelector('.carousel-container');
-            const dots = item.querySelectorAll('.dot');
-            
-            let currentIndex = 0;
-            
-            container.addEventListener('scroll', () => {
-                const scrollLeft = container.scrollLeft;
-                const imageWidth = container.children[0].offsetWidth;
-                const newIndex = Math.round(scrollLeft / imageWidth);
-                
-                if (newIndex !== currentIndex) {
-                    dots[currentIndex].classList.remove('active');
-                    dots[newIndex].classList.add('active');
-                    currentIndex = newIndex;
-                }
-            });
-            
-            // Touch-friendly dot navigation
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    const imageWidth = container.children[0].offsetWidth;
-                    container.scrollTo({
-                        left: imageWidth * index,
-                        behavior: 'smooth'
-                    });
-                });
-            });
         }
 
-        function showOrderModal(name, size, price) {
-            selectedProduct = { name, size, price };
-            document.getElementById('orderDetails').innerHTML = 
-                `<strong>${name}</strong> (${size}) - ${price}<br><br>
-                 <em>Reserve this authentic Valentino fragrance now. You'll only pay when it arrives at your door within 7 days.</em>`;
-            document.getElementById('orderModal').style.display = 'flex';
+        function initiateContact(name, size, price) {
+            const recipientEmail = "contact@wascovault.com"; // IMPORTANT: Change to your email
+            const subject = `Inquiry for: ${name}`;
+            const body = `Hello,\n\nI'm interested in acquiring the following item from your catalog:\n\nProduct: ${name}\nSize: ${size}\nPrice: ${price}\n\nPlease let me know the next steps for arranging a physical handover.\n\nThank you.`;
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
         }
 
         function showInfoModal() {
@@ -873,25 +302,12 @@
         }
 
         function closeModal() {
-            document.getElementById('orderModal').style.display = 'none';
             document.getElementById('infoModal').style.display = 'none';
         }
-
-        function confirmOrder() {
-            // Here you would typically send the order to your backend
-            alert(`Order confirmed! You'll receive tracking information for your ${selectedProduct.name} within 24 hours. No payment required until delivery.`);
-            closeModal();
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('orderModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeModal();
-        });
         
         document.getElementById('infoModal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) closeModal();
         });
     </script>
-    
 </body>
 </html>
