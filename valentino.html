@@ -69,13 +69,36 @@
         .image-carousel { position: relative; margin-bottom: 20px; }
         .carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
         .carousel-container::-webkit-scrollbar { display: none; }
-        .carousel-item { flex: 0 0 100%; height: 200px; background-color: #3A3A3C; border-radius: 8px; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; margin-right: 8px; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23444"/><text x="50" y="50" text-anchor="middle" dy="0.3em" fill="%23888" font-family="system-ui" font-size="12">Image Placeholder</text></svg>'); background-size: cover; background-position: center; position: relative; }
+        .carousel-item { flex: 0 0 100%; height: 200px; background-color: #3A3A3C; border-radius: 8px; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; margin-right: 8px; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23444"/><text x="50" y="50" text-anchor="middle" dy="0.3em" fill="%23888" font-family="system-ui" font-size="12">Image Placeholder</text></svg>'); background-size: cover; background-position: center; position: relative; cursor: pointer; }
         .carousel-item.image { background-size: cover; background-position: center; }
         .carousel-item.video { background: #000; }
-        .carousel-item video { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+        .carousel-item video { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; pointer-events: none; }
         .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; color: #000; transition: all 0.2s; z-index: 10; }
         .play-button:hover { background: rgba(255, 255, 255, 1); transform: translate(-50%, -50%) scale(1.1); }
         .play-button.hidden { display: none; }
+        
+        /* Fullscreen Modal Styles */
+        .media-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); display: none; justify-content: center; align-items: center; z-index: 3000; backdrop-filter: blur(10px); }
+        .media-modal.show { display: flex; }
+        .modal-content { position: relative; max-width: 90vw; max-height: 90vh; border-radius: 12px; overflow: hidden; }
+        .modal-image { width: 100%; height: 100%; object-fit: contain; max-width: 90vw; max-height: 90vh; border-radius: 12px; }
+        .modal-video { width: 100%; height: 100%; max-width: 90vw; max-height: 90vh; border-radius: 12px; }
+        .modal-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; font-weight: bold; z-index: 10; transition: all 0.2s; }
+        .modal-close:hover { background: rgba(255, 255, 255, 1); transform: scale(1.1); }
+        .modal-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 24px; font-weight: bold; transition: all 0.2s; z-index: 10; }
+        .modal-nav:hover { background: rgba(255, 255, 255, 1); transform: translateY(-50%) scale(1.1); }
+        .modal-nav.prev { left: 20px; }
+        .modal-nav.next { right: 20px; }
+        .modal-nav.disabled { opacity: 0.3; cursor: not-allowed; }
+        .modal-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.7); color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; }
+        
+        @media (max-width: 768px) {
+            .modal-close { top: 15px; right: 15px; width: 35px; height: 35px; font-size: 18px; }
+            .modal-nav { width: 45px; height: 45px; font-size: 20px; }
+            .modal-nav.prev { left: 15px; }
+            .modal-nav.next { right: 15px; }
+            .modal-counter { bottom: 15px; font-size: 13px; padding: 6px 12px; }
+        }
         .image-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--text-secondary); opacity: 0.3; transition: opacity 0.2s; }
         .dot.active { opacity: 1; background-color: var(--accent-blue); }
@@ -130,8 +153,8 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-donna" onscroll="updateDots(this, 'carousel-donna-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRoma.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRoma2.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRoma.webp');" onclick="openMediaModal('photos/DonnaBorninRoma.webp', 'image', 'carousel-donna')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRoma2.webp');" onclick="openMediaModal('photos/DonnaBorninRoma2.webp', 'image', 'carousel-donna')"></div>
                         </div>
                         <div class="image-dots" id="carousel-donna-dots">
                             <div class="dot active"></div>
@@ -153,13 +176,13 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-uomo" onscroll="updateDots(this, 'carousel-uomo-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/Uomo BoninRoma2.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRoma3.webp');"></div>
-                            <div class="carousel-item video">
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BoninRoma2.webp');" onclick="openMediaModal('photos/Uomo BoninRoma2.webp', 'image', 'carousel-uomo')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRoma3.webp');" onclick="openMediaModal('photos/Uomo BorninRoma3.webp', 'image', 'carousel-uomo')"></div>
+                            <div class="carousel-item video" onclick="openMediaModal('photos/Uomo BorninRomavideo.mp4', 'video', 'carousel-uomo')">
                                 <video preload="metadata" muted>
                                     <source src="photos/Uomo BorninRomavideo.mp4" type="video/mp4">
                                 </video>
-                                <div class="play-button" onclick="toggleVideo(this)">▶</div>
+                                <div class="play-button" onclick="event.stopPropagation(); toggleVideo(this)">▶</div>
                             </div>
                         </div>
                         <div class="image-dots" id="carousel-uomo-dots">
@@ -183,8 +206,8 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-donna-intense" onscroll="updateDots(this, 'carousel-donna-intense-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRomaIntense.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRomaIntense2.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRomaIntense.webp');" onclick="openMediaModal('photos/DonnaBorninRomaIntense.webp', 'image', 'carousel-donna-intense')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRomaIntense2.webp');" onclick="openMediaModal('photos/DonnaBorninRomaIntense2.webp', 'image', 'carousel-donna-intense')"></div>
                         </div>
                         <div class="image-dots" id="carousel-donna-intense-dots">
                             <div class="dot active"></div>
@@ -206,8 +229,8 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-uomo-intense" onscroll="updateDots(this, 'carousel-uomo-intense-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRomaintense.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRomaintense3.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRomaintense.webp');" onclick="openMediaModal('photos/Uomo BorninRomaintense.webp', 'image', 'carousel-uomo-intense')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRomaintense3.webp');" onclick="openMediaModal('photos/Uomo BorninRomaintense3.webp', 'image', 'carousel-uomo-intense')"></div>
                         </div>
                         <div class="image-dots" id="carousel-uomo-intense-dots">
                             <div class="dot active"></div>
@@ -229,7 +252,7 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-yellow" onscroll="updateDots(this, 'carousel-yellow-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/borninromayellowedp2.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/borninromayellowedp2.webp');" onclick="openMediaModal('photos/borninromayellowedp2.webp', 'image', 'carousel-yellow')"></div>
                         </div>
                         <div class="image-dots" id="carousel-yellow-dots">
                             <div class="dot active"></div>
@@ -263,14 +286,14 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-coral" onscroll="updateDots(this, 'carousel-coral-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantasy.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantas2y.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantasy3.webp');"></div>
-                            <div class="carousel-item video">
+                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantasy.webp');" onclick="openMediaModal('photos/borninromacoralfantasy.webp', 'image', 'carousel-coral')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantas2y.webp');" onclick="openMediaModal('photos/borninromacoralfantas2y.webp', 'image', 'carousel-coral')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantasy3.webp');" onclick="openMediaModal('photos/borninromacoralfantasy3.webp', 'image', 'carousel-coral')"></div>
+                            <div class="carousel-item video" onclick="openMediaModal('photos/borninromacoralfantasyvideo.mp4', 'video', 'carousel-coral')">
                                 <video preload="metadata" muted>
                                     <source src="photos/borninromacoralfantasyvideo.mp4" type="video/mp4">
                                 </video>
-                                <div class="play-button" onclick="toggleVideo(this)">▶</div>
+                                <div class="play-button" onclick="event.stopPropagation(); toggleVideo(this)">▶</div>
                             </div>
                         </div>
                         <div class="image-dots" id="carousel-coral-dots">
@@ -295,8 +318,8 @@
                 <div class="product-details"><div class="details-content">
                     <div class="image-carousel">
                         <div class="carousel-container" id="carousel-pink" onscroll="updateDots(this, 'carousel-pink-dots')">
-                            <div class="carousel-item image" style="background-image: url('photos/BORNINROMAPINKPP.webp');"></div>
-                            <div class="carousel-item image" style="background-image: url('photos/BORNINROMAPINKPP1.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/BORNINROMAPINKPP.webp');" onclick="openMediaModal('photos/BORNINROMAPINKPP.webp', 'image', 'carousel-pink')"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/BORNINROMAPINKPP1.webp');" onclick="openMediaModal('photos/BORNINROMAPINKPP1.webp', 'image', 'carousel-pink')"></div>
                         </div>
                         <div class="image-dots" id="carousel-pink-dots">
                             <div class="dot active"></div>
@@ -351,6 +374,18 @@
         </ul>
     </div>
 
+    <!-- Media Modal -->
+    <div id="mediaModal" class="media-modal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeMediaModal()">×</div>
+            <div class="modal-nav prev" onclick="navigateMedia(-1)">‹</div>
+            <div class="modal-nav next" onclick="navigateMedia(1)">›</div>
+            <img id="modalImage" class="modal-image" style="display: none;" />
+            <video id="modalVideo" class="modal-video" controls style="display: none;"></video>
+            <div class="modal-counter" id="modalCounter"></div>
+        </div>
+    </div>
+
     <div id="infoModal" class="modal-overlay">
         <div class="modal">
             <h3>Our Process</h3>
@@ -368,6 +403,112 @@
     </footer>
     
     <script>
+        // Media modal functionality
+        let currentMediaSet = [];
+        let currentMediaIndex = 0;
+        let currentCarouselId = '';
+
+        function getMediaFromCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const items = carousel.querySelectorAll('.carousel-item');
+            const mediaItems = [];
+            
+            items.forEach((item, index) => {
+                if (item.classList.contains('image')) {
+                    const bgImage = item.style.backgroundImage;
+                    const url = bgImage.slice(5, -2); // Remove url(" and ")
+                    mediaItems.push({ type: 'image', src: url, index });
+                } else if (item.classList.contains('video')) {
+                    const video = item.querySelector('video source');
+                    mediaItems.push({ type: 'video', src: video.src, index });
+                }
+            });
+            
+            return mediaItems;
+        }
+
+        function openMediaModal(src, type, carouselId) {
+            currentCarouselId = carouselId;
+            currentMediaSet = getMediaFromCarousel(carouselId);
+            
+            // Find the index of the clicked media
+            currentMediaIndex = currentMediaSet.findIndex(item => item.src === src);
+            
+            showMedia(currentMediaIndex);
+            document.getElementById('mediaModal').classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function showMedia(index) {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            const counter = document.getElementById('modalCounter');
+            const prevBtn = modal.querySelector('.modal-nav.prev');
+            const nextBtn = modal.querySelector('.modal-nav.next');
+            
+            const media = currentMediaSet[index];
+            
+            if (media.type === 'image') {
+                modalImage.src = media.src;
+                modalImage.style.display = 'block';
+                modalVideo.style.display = 'none';
+                modalVideo.pause();
+            } else {
+                modalVideo.src = media.src;
+                modalVideo.style.display = 'block';
+                modalImage.style.display = 'none';
+            }
+            
+            counter.textContent = `${index + 1} / ${currentMediaSet.length}`;
+            
+            // Update navigation buttons
+            prevBtn.classList.toggle('disabled', index === 0);
+            nextBtn.classList.toggle('disabled', index === currentMediaSet.length - 1);
+        }
+
+        function navigateMedia(direction) {
+            const newIndex = currentMediaIndex + direction;
+            if (newIndex >= 0 && newIndex < currentMediaSet.length) {
+                currentMediaIndex = newIndex;
+                showMedia(currentMediaIndex);
+            }
+        }
+
+        function closeMediaModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            modalVideo.pause();
+            modal.classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('mediaModal');
+            if (modal.classList.contains('show')) {
+                switch(e.key) {
+                    case 'Escape':
+                        closeMediaModal();
+                        break;
+                    case 'ArrowLeft':
+                        navigateMedia(-1);
+                        break;
+                    case 'ArrowRight':
+                        navigateMedia(1);
+                        break;
+                }
+            }
+        });
+
+        // Close modal when clicking outside content
+        document.getElementById('mediaModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeMediaModal();
+            }
+        });
+
         function toggleProduct(header) {
             const item = header.parentElement;
             const wasExpanded = item.classList.contains('expanded');
