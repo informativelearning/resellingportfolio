@@ -69,7 +69,13 @@
         .image-carousel { position: relative; margin-bottom: 20px; }
         .carousel-container { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
         .carousel-container::-webkit-scrollbar { display: none; }
-        .carousel-image { flex: 0 0 100%; height: 200px; background-color: #3A3A3C; border-radius: 8px; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; margin-right: 8px; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23444"/><text x="50" y="50" text-anchor="middle" dy="0.3em" fill="%23888" font-family="system-ui" font-size="12">Image Placeholder</text></svg>'); background-size: cover; background-position: center; }
+        .carousel-item { flex: 0 0 100%; height: 200px; background-color: #3A3A3C; border-radius: 8px; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; margin-right: 8px; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23444"/><text x="50" y="50" text-anchor="middle" dy="0.3em" fill="%23888" font-family="system-ui" font-size="12">Image Placeholder</text></svg>'); background-size: cover; background-position: center; position: relative; }
+        .carousel-item.image { background-size: cover; background-position: center; }
+        .carousel-item.video { background: #000; }
+        .carousel-item video { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; color: #000; transition: all 0.2s; z-index: 10; }
+        .play-button:hover { background: rgba(255, 255, 255, 1); transform: translate(-50%, -50%) scale(1.1); }
+        .play-button.hidden { display: none; }
         .image-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--text-secondary); opacity: 0.3; transition: opacity 0.2s; }
         .dot.active { opacity: 1; background-color: var(--accent-blue); }
@@ -122,6 +128,16 @@
                     <div class="product-price">$95</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-donna" onscroll="updateDots(this, 'carousel-donna-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRoma.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRoma2.webp');"></div>
+                        </div>
+                        <div class="image-dots" id="carousel-donna-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">A modern floral fragrance that captures the essence of Roman elegance with notes of jasmine, vanilla, and white tea.</div>
                     <button class="contact-button" onclick="initiateContact('Donna Born in Roma', 'EDP • 100ml', '$95')">Contact to Acquire</button>
@@ -135,6 +151,23 @@
                     <div class="product-price">$95</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-uomo" onscroll="updateDots(this, 'carousel-uomo-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BoninRoma2.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRoma3.webp');"></div>
+                            <div class="carousel-item video">
+                                <video preload="metadata" muted>
+                                    <source src="photos/Uomo BorninRomavideo.mp4" type="video/mp4">
+                                </video>
+                                <div class="play-button" onclick="toggleVideo(this)">▶</div>
+                            </div>
+                        </div>
+                        <div class="image-dots" id="carousel-uomo-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">A vibrant and masculine fragrance with notes of mineral salt, violet leaf, and vetiver for a modern, edgy signature.</div>
                     <button class="contact-button" onclick="initiateContact('Uomo Born in Roma', 'EDT • 100ml', '$95')">Contact to Acquire</button>
@@ -148,6 +181,16 @@
                     <div class="product-price">$105</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-donna-intense" onscroll="updateDots(this, 'carousel-donna-intense-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRomaIntense.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/DonnaBorninRomaIntense2.webp');"></div>
+                        </div>
+                        <div class="image-dots" id="carousel-donna-intense-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">A deeper, more sensual version of the original, amplifying the vanilla and jasmine notes for a magnetic and addictive trail.</div>
                     <button class="contact-button" onclick="initiateContact('Donna Born in Roma Intense', 'EDP • 100ml', '$105')">Contact to Acquire</button>
@@ -161,6 +204,16 @@
                     <div class="product-price">$105</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-uomo-intense" onscroll="updateDots(this, 'carousel-uomo-intense-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRomaintense.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/Uomo BorninRomaintense3.webp');"></div>
+                        </div>
+                        <div class="image-dots" id="carousel-uomo-intense-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">An intense and charismatic scent that pushes the vetiver and vanilla infusion to new heights, creating a powerful statement.</div>
                     <button class="contact-button" onclick="initiateContact('Uomo Born in Roma Intense', 'EDP • 100ml', '$105')">Contact to Acquire</button>
@@ -174,6 +227,14 @@
                     <div class="product-price">$98</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-yellow" onscroll="updateDots(this, 'carousel-yellow-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/borninromayellowedp2.webp');"></div>
+                        </div>
+                        <div class="image-dots" id="carousel-yellow-dots">
+                            <div class="dot active"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">A fresh floral musk with bright notes of Italian lemon and Damascan rose, evoking the golden light of Rome.</div>
                     <button class="contact-button" onclick="initiateContact('Born in Roma Yellow Dream', 'EDP • 100ml', '$98')">Contact to Acquire</button>
@@ -200,6 +261,25 @@
                     <div class="product-price">$98</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-coral" onscroll="updateDots(this, 'carousel-coral-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantasy.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantas2y.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/borninromacoralfantasy3.webp');"></div>
+                            <div class="carousel-item video">
+                                <video preload="metadata" muted>
+                                    <source src="photos/borninromacoralfantasyvideo.mp4" type="video/mp4">
+                                </video>
+                                <div class="play-button" onclick="toggleVideo(this)">▶</div>
+                            </div>
+                        </div>
+                        <div class="image-dots" id="carousel-coral-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">A fruity amber fragrance inspired by Rome's coral-sky sunsets, with notes of red apple, sage, and tobacco.</div>
                     <button class="contact-button" onclick="initiateContact('Born in Roma Coral Fantasy', 'EDT • 100ml', '$98')">Contact to Acquire</button>
@@ -213,6 +293,16 @@
                     <div class="product-price">$110</div><span class="chevron">&rsaquo;</span>
                 </div>
                 <div class="product-details"><div class="details-content">
+                    <div class="image-carousel">
+                        <div class="carousel-container" id="carousel-pink" onscroll="updateDots(this, 'carousel-pink-dots')">
+                            <div class="carousel-item image" style="background-image: url('photos/BORNINROMAPINKPP.webp');"></div>
+                            <div class="carousel-item image" style="background-image: url('photos/BORNINROMAPINKPP1.webp');"></div>
+                        </div>
+                        <div class="image-dots" id="carousel-pink-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
                     <div class="fulfillment-badge">✓ AUTHENTICITY GUARANTEED</div><div class="availability-status"><div class="status-indicator"></div><span>Available via 7-Day Sourcing</span></div>
                     <div class="product-description">A vibrant and exclusive edition featuring a blend of Calabrian bergamot and bourbon vanilla. A true collector's item.</div>
                     <button class="contact-button" onclick="initiateContact('Born in Roma Pink PP', 'EDP • 100ml', '$110')">Contact to Acquire</button>
@@ -284,10 +374,86 @@
             document.querySelectorAll('.product-item.expanded').forEach(expandedItem => {
                 if (expandedItem !== item) {
                     expandedItem.classList.remove('expanded');
+                    // Pause any playing videos in collapsed items
+                    const videos = expandedItem.querySelectorAll('video');
+                    videos.forEach(video => {
+                        video.pause();
+                        const playButton = video.nextElementSibling;
+                        if (playButton && playButton.classList.contains('play-button')) {
+                            playButton.innerHTML = '▶';
+                            playButton.classList.remove('hidden');
+                        }
+                    });
                 }
             });
             item.classList.toggle('expanded');
         }
+
+        function updateDots(carousel, dotsId) {
+            const dots = document.getElementById(dotsId).children;
+            const scrollLeft = carousel.scrollLeft;
+            const itemWidth = carousel.children[0].offsetWidth + 8; // including margin
+            const activeIndex = Math.round(scrollLeft / itemWidth);
+            
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === activeIndex);
+            }
+        }
+
+        function toggleVideo(playButton) {
+            const video = playButton.previousElementSibling;
+            if (video.paused) {
+                video.play();
+                playButton.innerHTML = '⏸';
+            } else {
+                video.pause();
+                playButton.innerHTML = '▶';
+            }
+        }
+
+        // Add touch/swipe support for better mobile experience
+        let isDown = false;
+        let startX;
+        let scrollLeftStart;
+
+        document.querySelectorAll('.carousel-container').forEach(carousel => {
+            carousel.addEventListener('mousedown', (e) => {
+                isDown = true;
+                carousel.classList.add('active');
+                startX = e.pageX - carousel.offsetLeft;
+                scrollLeftStart = carousel.scrollLeft;
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                isDown = false;
+                carousel.classList.remove('active');
+            });
+
+            carousel.addEventListener('mouseup', () => {
+                isDown = false;
+                carousel.classList.remove('active');
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - carousel.offsetLeft;
+                const walk = (x - startX) * 2;
+                carousel.scrollLeft = scrollLeftStart - walk;
+            });
+
+            // Touch events for mobile
+            carousel.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].pageX - carousel.offsetLeft;
+                scrollLeftStart = carousel.scrollLeft;
+            });
+
+            carousel.addEventListener('touchmove', (e) => {
+                const x = e.touches[0].pageX - carousel.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                carousel.scrollLeft = scrollLeftStart - walk;
+            });
+        });
 
         function initiateContact(name, size, price) {
             const recipientEmail = "contact@wascovault.com"; // IMPORTANT: Change to your email
